@@ -1,6 +1,9 @@
 <div align="center">
 
-# DIZZY STUDIO
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="img/logo/dizzy-studio-blanco.svg">
+  <img src="img/logo/dizzy-studio.svg" alt="Dizzy Studio" width="300">
+</picture>
 
 ### Chunky knitwear in colours you can spot from across the street.
 
