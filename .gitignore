@@ -1,0 +1,14 @@
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Dependencias y temporales (si en el futuro se añaden herramientas)
+node_modules/
+*.log
+.env

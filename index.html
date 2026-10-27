@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en" class="intro-lock intro-hold">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Dizzy Studio</title>
+    <meta
+      name="description"
+      content="Dizzy Studio: chunky-knit sweaters, cardigans and accessories in colours with attitude."
+    />
+    <link rel="icon" type="image/webp" href="img/logo/logo-ovillo.webp" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Entrada de High Noon: estrella de sheriff (6 fotogramas, de 0 a 5 agujeros) que se agujerea y se cae. Código en main.js, busca "estrella" -->
+    <div class="sheriff" id="sheriff" hidden>
+      <div class="sh-dust" id="shDust"></div>
+      <div class="sh-stage" id="shStage">
+        <div class="sh-swing" id="shSwing">
+          <img class="sh-f" data-src="img/west/estrella/estrella-0.webp" alt="" width="900" height="900" decoding="async" />
+          <img class="sh-f" data-src="img/west/estrella/estrella-1.webp" alt="" width="900" height="900" decoding="async" />
+          <img class="sh-f" data-src="img/west/estrella/estrella-2.webp" alt="" width="900" height="900" decoding="async" />
+          <img class="sh-f" data-src="img/west/estrella/estrella-3.webp" alt="" width="900" height="900" decoding="async" />
+          <img class="sh-f" data-src="img/west/estrella/estrella-4.webp" alt="" width="900" height="900" decoding="async" />
+          <img class="sh-f" data-src="img/west/estrella/estrella-5.webp" alt="" width="900" height="900" decoding="async" />
+        </div>
+        <span class="sh-nail" aria-hidden="true"></span>
+      </div>
+      <span class="sh-label">Drop 02 · High Noon</span>
+      <button class="intro-skip sh-skip" type="button" data-i18n="intro.skip">Skip intro</button>
+    </div>
+
+    <div class="intro" id="intro">
+      <div class="intro-yarn" id="introYarn" aria-hidden="true"><div class="intro-veil"></div><div class="intro-base"></div></div>
+      <div class="intro-brand" id="introBrand" aria-hidden="true"><span>Dizzy</span><span>Studio</span></div>
+      <div class="intro-ball" id="introBall" aria-hidden="true"><i></i></div>
+      <button class="intro-skip" id="introSkip" type="button" data-i18n="intro.skip">Skip intro</button>
+    </div>
+    <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+      <filter id="unravel" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.02 0.22" numOctaves="2" seed="4" />
+        <feDisplacementMap id="disp" in="SourceGraphic" scale="0" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+    <div class="notice" id="notice" aria-live="off"></div>
+
+    <header class="top" id="top">
+      <div class="wrap">
+        <a class="brand" href="#inicio" aria-label="Dizzy Studio, home" data-i18n-attr="aria-label:a.home"
+          ><span class="logo" id="headLogo" aria-hidden="true"
+            ><svg class="yl" viewBox="0 0 760 590">
+              <path
+                pathLength="1"
+                d="M200 378 C 300 378, 352 362, 404 372 S 508 390, 560 374 S 660 358, 716 374"
+              /></svg
+            ><i class="lb"></i><i class="ltail"></i><span class="ltw"><i class="lt"></i></span></span
+        ></a>
+        <nav class="main" aria-label="Main" data-i18n-attr="aria-label:a.main">
+          <a href="#novedades" data-i18n="nav.new">New in</a>
+          <a href="#novedades" data-jump="sweaters" data-i18n="nav.sweaters">Sweaters</a>
+          <a href="#novedades" data-jump="accessories" data-i18n="nav.accessories">Accessories</a>
+          <a href="#lookbook" data-i18n="nav.lookbook">Lookbook</a>
+          <a href="#taller" data-i18n="nav.workshop">The workshop</a>
+          <a href="#high-noon" class="nav-west"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.4 6.3 6.6.3-5.2 4.2 1.8 6.4L12 16l-5.6 3.7 1.8-6.4L3 9.1l6.6-.3z"/></svg><span>High Noon</span></a>
+        </nav>
+        <div class="tools">
+          <div class="lang" role="group" aria-label="Language" data-i18n-attr="aria-label:a.lang">
+            <button data-lang="en" lang="en" aria-pressed="true">EN</button
+            ><button data-lang="es" lang="es" aria-pressed="false">ES</button
+            ><button data-lang="zh" lang="zh-Hans" aria-pressed="false">中文</button>
+          </div>
+          <button class="icon-btn theme-btn" id="themeBtn" aria-label="Switch to dark mode">
+            <svg class="moon" viewBox="0 0 24 24">
+              <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" />
+            </svg>
+            <svg class="sun" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+              />
+            </svg>
+          </button>
+          <button class="icon-btn" id="favBtn" aria-label="View favourites" data-i18n-attr="aria-label:a.favs">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" />
+            </svg>
+            <span class="badge" id="favBadge" hidden>0</span>
+          </button>
+          <button class="icon-btn" id="cartBtn" aria-label="Open bag" data-i18n-attr="aria-label:a.cartOpen">
+            <svg viewBox="0 0 24 24">
+              <path d="M5 8h14l-1.2 12H6.2z" />
+              <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+            </svg>
+            <span class="badge" id="badge" hidden>0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="inicio">
+      <section class="hero" style="padding-block: 0">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <span class="kicker" data-i18n="hero.kicker">Autumn · Winter 2026 Collection</span>
+            <h1 id="heroTitle">
+              <span data-i18n="hero.l1">Knits</span><span data-i18n="hero.l2">with</span><span><em data-i18n="hero.l3">attitude</em></span>
+            </h1>
+            <p data-i18n="hero.p">
+              Chunky-knit sweaters, cardigans and accessories in colours you can spot from across the street.
+            </p>
+            <div class="cta-row">
+              <a class="btn" href="#novedades"
+                ><span data-i18n="hero.shop">Shop now</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg
+              ></a>
+              <a class="btn ghost" href="#drop" data-i18n="hero.drop">Next drop</a>
+            </div>
+          </div>
+          <div class="hero-photo">
+            <img
+              id="heroImg"
+              src="img/hero.webp"
+              alt="Model wearing the magenta cable sweater, holding a ball of yarn with knitting needles"
+              data-i18n-attr="alt:hero.alt"
+              width="1270"
+              height="1700"
+            />
+            <div class="pick">
+              <img id="pickImg" alt="" width="52" height="52" />
+              <div>
+                <a href="#jersey" style="text-decoration: none"><b data-i18n="p.jersey">Cable Sweater</b></a
+                ><span id="pickMeta">Magenta · €89.00</span>
+              </div>
+              <button id="pickAdd" data-i18n="pick.add">Add · M</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="ticker" aria-hidden="true"><div class="row" id="ticker"></div></div>
+
+      <!-- Drop 02 · High Noon: tarjeta compacta en la portada -->
+      <section class="west-teaser" id="drop02" aria-labelledby="wtTitle">
+        <div class="wrap">
+          <a class="wt" href="#high-noon" data-reveal>
+            <span class="wt-img">
+              <img
+                id="wtImg"
+                src="img/west/sm/duelo.webp"
+                srcset="img/west/sm/duelo.webp 900w, img/west/duelo.webp 2000w"
+                sizes="(max-width: 760px) 120px, 420px"
+                alt="Two models in a desert duel, pointing at each other with finger guns"
+                data-i18n-attr="alt:wt.alt"
+                width="900"
+                height="503"
+                loading="lazy"
+                decoding="async"
+              />
+            </span>
+            <span class="wt-copy">
+              <span class="wt-kicker"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.4 6.3 6.6.3-5.2 4.2 1.8 6.4L12 16l-5.6 3.7 1.8-6.4L3 9.1l6.6-.3z"/></svg><span data-i18n="wt.kicker">Drop 02 · Unisex capsule</span></span>
+              <span class="wt-h" id="wtTitle">High Noon</span>
+              <span class="wt-p" data-i18n="wt.p">Denim, leather and dust. A unisex western capsule for the showdown. No weapons, just attitude.</span>
+            </span>
+            <span class="wt-go"><span data-i18n="wt.cta">Enter the desert</span><i><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg></i></span>
+          </a>
+        </div>
+      </section>
+
+      <section id="novedades">
+        <div class="wrap">
+          <div class="sec-head" data-reveal>
+            <div class="l">
+              <span class="kicker" data-i18n="new.kicker">New in</span>
+              <h2 data-i18n-html="new.h2">What keeps you <em>warmest</em></h2>
+            </div>
+            <div class="filters" id="filters" role="group" aria-label="Filter by category" data-i18n-attr="aria-label:a.filter"></div>
+          </div>
+          <div class="grid" id="grid"></div>
+        </div>
+      </section>
+
+      <section class="lookbook" id="lookbook">
+        <div class="wrap">
+          <div class="sec-head" data-reveal>
+            <div class="l">
+              <span class="kicker" data-i18n="look.kicker">Lookbook A/W 26</span>
+              <h2 data-i18n-html="look.h2">Three ways <em>to wear it</em></h2>
+            </div>
+            <p data-i18n="look.p">
+              Each look lists its pieces alongside. Add the whole look to your bag in size M, or pick piece by
+              piece in the shop.
+            </p>
+          </div>
+          <div class="looks" id="looks"></div>
+        </div>
+      </section>
+
+      <section class="knit-sec" aria-label="Made stitch by stitch" data-i18n-attr="aria-label:a.knit">
+        <div class="wrap knit-box">
+          <div class="l" data-reveal>
+            <span class="kicker" data-i18n="knit.kicker">Stitch by stitch</span>
+            <h2 data-i18n-html="knit.h2">Every piece <em>is knitted</em> slowly</h2>
+            <p data-i18n="knit.p">
+              Scroll slowly and watch this swatch being knitted. That's how every sweater is born: row after
+              row, until the colour is just right.
+            </p>
+            <div class="knit-count">
+              <span id="knitNum">0</span
+              ><small
+                ><span data-i18n="knit.of">of</span> <span id="knitTotal">0</span>
+                <span data-i18n="knit.stitches">stitches</span></small
+              >
+            </div>
+          </div>
+          <div class="swatch" data-reveal style="--d: 0.1s">
+            <svg id="swatch" viewBox="0 0 480 300" aria-hidden="true"></svg>
+          </div>
+        </div>
+      </section>
+
+      <section class="workshop" id="taller" aria-label="The workshop" data-i18n-attr="aria-label:a.workshop">
+        <div class="ws-photo">
+          <img
+            id="wsImg"
+            src="img/taller.webp"
+            alt="Hands knitting magenta yarn with metal needles"
+            data-i18n-attr="alt:ws.alt"
+            width="2000"
+            height="848"
+          />
+        </div>
+        <div class="wrap">
+          <div class="ws-head" data-reveal>
+            <span class="kicker" data-i18n="ws.kicker">The workshop</span>
+            <h2 data-i18n-html="ws.h2">From the yarn ball <em>to your wardrobe</em></h2>
+          </div>
+          <div class="steps">
+            <article class="step" data-reveal>
+              <span class="n" data-i18n="ws.s1n">STEP 01</span>
+              <h3 data-i18n="ws.s1h">Design</h3>
+              <p data-i18n="ws.s1p">
+                We sketch every piece and test the colour again and again until it truly stands out.
+              </p>
+            </article>
+            <article class="step" data-reveal style="--d: 0.1s">
+              <span class="n" data-i18n="ws.s2n">STEP 02</span>
+              <h3 data-i18n="ws.s2h">Knitting</h3>
+              <p data-i18n="ws.s2p">Chunky knits, bold cables and ribs that keep their shape wash after wash.</p>
+            </article>
+            <article class="step" data-reveal style="--d: 0.2s">
+              <span class="n" data-i18n="ws.s3n">STEP 03</span>
+              <h3 data-i18n="ws.s3h">Finishing</h3>
+              <p data-i18n="ws.s3p">
+                We finish every seam, check each piece by hand and fold it ready to give as a gift.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="drop">
+        <div class="wrap">
+          <div class="drop-card" data-reveal>
+            <div class="l">
+              <span class="kicker">Drop 01</span>
+              <h3 data-i18n-html="drop.h3">Limited <em>magenta</em> edition</h3>
+              <p data-i18n="drop.p">
+                Matching sweater and beanie in the logo's magenta. Numbered units, Friday 6 November at 8 pm
+                CET.
+              </p>
+            </div>
+            <div class="count">
+              <div><b id="cd-d">00</b><span data-i18n="cd.d">days</span></div>
+              <div><b id="cd-h">00</b><span data-i18n="cd.h">hours</span></div>
+              <div><b id="cd-m">00</b><span data-i18n="cd.m">min</span></div>
+              <div><b id="cd-s">00</b><span data-i18n="cd.s">sec</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tallas" style="padding-top: 0">
+        <div class="wrap size-wrap">
+          <div class="l" data-reveal>
+            <span class="kicker" data-i18n="size.kicker">Size guide</span>
+            <h2 data-i18n-html="size.h2">Find <em>your size</em></h2>
+            <p data-i18n="size.p">
+              Body measurements. Our knits have a relaxed fit: if you're between two sizes, go for the smaller
+              one.
+            </p>
+            <div class="toggle" role="group" aria-label="Measurement unit" data-i18n-attr="aria-label:a.unit">
+              <button id="u-cm" aria-pressed="true" data-i18n="size.cm">Centimetres</button>
+              <button id="u-in" aria-pressed="false" data-i18n="size.in">Inches</button>
+            </div>
+          </div>
+          <div class="table-scroll" data-reveal style="--d: 0.12s">
+            <table>
+              <thead>
+                <tr>
+                  <th data-i18n="size.th1">Size</th>
+                  <th data-i18n="size.th2">Chest</th>
+                  <th data-i18n="size.th3">Waist</th>
+                  <th data-i18n="size.th4">Sleeve length</th>
+                </tr>
+              </thead>
+              <tbody id="sizeBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrap">
+        <div class="perks" data-reveal>
+          <div class="perk">
+            <span class="ic"
+              ><svg viewBox="0 0 24 24">
+                <path d="M3 7h11v9H3zM14 10h4l3 3v3h-7" />
+                <circle cx="7" cy="17.5" r="1.8" />
+                <circle cx="17" cy="17.5" r="1.8" /></svg
+            ></span>
+            <div>
+              <b data-i18n="perk.1b">Free shipping over €80</b
+              ><span data-i18n="perk.1s">Delivered in 48 to 72 hours.</span>
+            </div>
+          </div>
+          <div class="perk">
+            <span class="ic"
+              ><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4" /></svg
+            ></span>
+            <div>
+              <b data-i18n="perk.2b">30 days for exchanges</b
+              ><span data-i18n="perk.2s">Exchanges and returns, no questions asked.</span>
+            </div>
+          </div>
+          <div class="perk">
+            <span class="ic"
+              ><svg viewBox="0 0 24 24">
+                <path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z" /></svg
+            ></span>
+            <div>
+              <b data-i18n="perk.3b">Limited editions</b
+              ><span data-i18n="perk.3s">Few units per colour and season.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section id="club">
+        <div class="wrap">
+          <div class="news" data-reveal>
+            <svg class="needles" viewBox="0 0 180 220" aria-hidden="true">
+              <line x1="60" y1="20" x2="110" y2="210" />
+              <line x1="120" y1="20" x2="70" y2="210" />
+              <circle cx="60" cy="18" r="9" />
+              <circle cx="120" cy="18" r="9" />
+            </svg>
+            <div>
+              <h2 data-i18n-html="news.h2">Join the <em>Dizzy circle</em></h2>
+              <p data-i18n="news.p">
+                Early access to every drop, restocks before anyone else and 10% off your first order.
+              </p>
+            </div>
+            <form id="newsForm" novalidate>
+              <label for="email" data-i18n="news.label">Your email</label>
+              <div class="field">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="name@email.com"
+                  data-i18n-attr="placeholder:news.ph"
+                  autocomplete="email"
+                  required
+                />
+                <button type="submit" data-i18n="news.btn">Join</button>
+              </div>
+              <div class="msg" id="newsMsg" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Página de la cápsula High Noon (se abre con #high-noon) -->
+    <main id="west" hidden>
+      <section class="w-hero">
+        <div class="wrap">
+          <div class="w-meta">
+            <span class="w-kicker"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.4 6.3 6.6.3-5.2 4.2 1.8 6.4L12 16l-5.6 3.7 1.8-6.4L3 9.1l6.6-.3z"/></svg><span data-i18n="wt.kicker">Drop 02 · Unisex capsule</span></span>
+            <span class="w-meta-r">SS27 · 05 / 05</span>
+          </div>
+          <h1 class="w-title" id="wTitle"><span>High</span> <span>Noon</span></h1>
+          <div class="w-card" id="wCard">
+            <img
+              id="wHeroImg"
+              src="img/west/duelo.webp"
+              srcset="img/west/sm/duelo.webp 900w, img/west/duelo.webp 2000w"
+              sizes="(max-width: 1340px) 96vw, 1260px"
+              alt="Two models in a desert duel, pointing at each other with finger guns"
+              data-i18n-attr="alt:wt.alt"
+              width="2000"
+              height="1117"
+              decoding="async"
+            />
+            <span class="w-tag" data-i18n="w.tag">Showdown in denim</span>
+            <svg class="w-badge" viewBox="0 0 200 200" aria-hidden="true">
+                <defs><path id="wbCircle" d="M100 100m-74 0a74 74 0 1 1 148 0a74 74 0 1 1-148 0" /></defs>
+                <circle cx="100" cy="100" r="96" />
+                <g class="w-badge-ring"><text><textPath href="#wbCircle" textLength="462" lengthAdjust="spacing">DROP 02 • HIGH NOON • UNISEX • DIZZY STUDIO • </textPath></text></g>
+                <path class="w-badge-star" d="M100 62l9.5 24.6 26.4 1.3-20.6 16.5 7 25.5L100 115.5l-22.3 14.4 7-25.5-20.6-16.5 26.4-1.3z" />
+              </svg>
+          </div>
+          <div class="w-intro">
+            <p class="w-lead" data-i18n="w.p">
+              Five pieces, two belt colours and one rule: whoever draws first with their fingers wins. Every piece is unisex and cut to be shared.
+            </p>
+            <ul class="w-stats">
+              <li><b>05</b><span data-i18n="w.s1">Pieces</span></li>
+              <li><b>1</b><span data-i18n="w.s2">Fit for everyone</span></li>
+              <li><b id="wFrom">€49</b><span data-i18n="w.s3">Starting price</span></li>
+            </ul>
+            <div class="w-ctas">
+              <a class="btn" href="#w-shop"><span data-i18n="w.shop">Shop the capsule</span> <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+              <a class="btn ghost" href="#novedades" data-i18n="w.back">Back to knitwear</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="w-band-wrap" aria-hidden="true"><div class="w-band" id="wBand"></div></div>
+
+      <section class="w-shop" id="w-shop">
+        <div class="wrap">
+          <div class="sec-head" data-reveal>
+            <div class="l">
+              <span class="kicker" data-i18n="w.gridK">The capsule</span>
+              <h2 data-i18n-html="w.gridH">Most <em>wanted</em></h2>
+            </div>
+            <p data-i18n="w.gridP">Denim, leather and a silver buckle. Hover a piece to see it on.</p>
+          </div>
+          <div class="w-bento" id="westGrid"></div>
+        </div>
+      </section>
+
+      <section class="w-lb" id="wLb" aria-labelledby="wLbH">
+        <div class="w-lb-pin">
+          <div class="wrap w-lb-head">
+            <span class="kicker" data-i18n="w.lbK">Lookbook</span>
+            <h2 id="wLbH" data-i18n-html="w.lbH">Dressed for the <em>duel</em></h2>
+          </div>
+          <div class="w-track" id="wTrack"></div>
+        </div>
+      </section>
+
+      <section class="w-unisex">
+        <div class="wrap">
+          <div class="sec-head" data-reveal>
+            <div class="l">
+              <span class="kicker" data-i18n="w.uniK">Unisex</span>
+              <h2 data-i18n-html="w.uniH">Cut to be <em>shared</em></h2>
+            </div>
+            <p data-i18n="w.uniP">Every piece fits any body. Here's how to find yours.</p>
+          </div>
+          <ul class="w-sizes">
+            <li data-reveal><span class="w-sz-k" data-i18n="w.u1b">Jeans</span><b>W26–W36</b><span data-i18n="w.u1s">Waist sizes W26 to W36, straight leg.</span></li>
+            <li data-reveal style="--d: 0.06s"><span class="w-sz-k" data-i18n="w.u2b">Boots</span><b>36–45</b><span data-i18n="w.u2s">EU 36 to 45. If you're between sizes, go smaller.</span></li>
+            <li data-reveal style="--d: 0.12s"><span class="w-sz-k" data-i18n="w.u3b">Hat</span><b>S–L</b><span data-i18n="w.u3s">S, M and L, from 55 to 59 cm.</span></li>
+            <li data-reveal style="--d: 0.18s"><span class="w-sz-k" data-i18n="w.u4b">Belt</span><b>75–105</b><span data-i18n="w.u4s">75 to 105 cm, in brown or black.</span></li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <main id="pdp" hidden>
+      <div class="wrap pdp" id="pdpWrap"></div>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot">
+          <div class="about">
+            <a href="#inicio" aria-label="Dizzy Studio, back to top" data-i18n-attr="aria-label:a.backTop" style="display: inline-block"
+              ><span class="logo" aria-hidden="true"
+                ><i class="lb"></i><i class="ltail"></i><span class="ltw"><i class="lt"></i></span></span
+            ></a>
+            <p data-i18n="foot.about">Chunky knits, colour with attitude and limited editions.</p>
+          </div>
+          <div>
+            <h4 data-i18n="foot.shop">Shop</h4>
+            <ul>
+              <li><a href="#novedades" data-i18n="nav.new">New in</a></li>
+              <li><a href="#novedades" data-jump="sweaters" data-i18n="cat.sweaters">Sweaters</a></li>
+              <li><a href="#novedades" data-jump="cardigans" data-i18n="cat.cardigans">Cardigans &amp; vests</a></li>
+              <li><a href="#novedades" data-jump="accessories" data-i18n="cat.accessories">Accessories</a></li>
+              <li><a href="#lookbook" data-i18n="nav.lookbook">Lookbook</a></li>
+              <li><a href="#high-noon">High Noon · Drop 02</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 data-i18n="foot.help">Help</h4>
+            <ul>
+              <li><a href="#tallas" data-i18n="size.kicker">Size guide</a></li>
+              <li><a href="#inicio" data-i18n="foot.shipping">Shipping</a></li>
+              <li><a href="#inicio" data-i18n="foot.returns">Exchanges &amp; returns</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 data-i18n="foot.contact">Contact</h4>
+            <ul>
+              <li>hola@dizzystudio.es</li>
+              <li>@dizzy.studio</li>
+              <li data-i18n="foot.hours">Monday to Friday, 10 am to 6 pm</li>
+            </ul>
+          </div>
+        </div>
+        <div class="legal"><span>© 2026 Dizzy Studio</span><span data-i18n="foot.vat">Prices include VAT</span></div>
+      </div>
+    </footer>
+
+    <div class="scrim" id="scrim"></div>
+    <aside class="drawer" id="drawer" aria-label="Bag" data-i18n-attr="aria-label:a.cart" aria-hidden="true">
+      <div class="dh">
+        <h3 data-i18n="cart.title">Your bag</h3>
+        <button class="icon-btn" id="closeCart" aria-label="Close bag" data-i18n-attr="aria-label:a.cartClose">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></svg>
+        </button>
+      </div>
+      <div class="items" id="items"></div>
+      <div class="totals" id="totals"></div>
+    </aside>
+    <div class="toast" id="toast" role="status"></div>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

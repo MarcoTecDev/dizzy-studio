@@ -1,0 +1,28 @@
+Copyright (c) 2026 Marco · Dizzy Studio. All rights reserved.
+
+This repository and all of its contents, including but not limited to source code,
+markup, stylesheets, scripts, texts, translations, images, logos, designs and the
+"Dizzy Studio" and "High Noon" names and brand assets (the "Work"), are the exclusive
+property of the copyright holder.
+
+The Work is made publicly visible for viewing and reference purposes only. No licence
+or right is granted, expressly or by implication, to any person to copy, reproduce,
+modify, merge, publish, distribute, sublicense, sell, host, deploy, or create
+derivative works from the Work, in whole or in part, for any purpose, commercial or
+non-commercial, without the prior written permission of the copyright holder.
+
+Viewing the Work on GitHub, and forking it within GitHub as permitted by the GitHub
+Terms of Service, does not grant any further rights.
+
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. IN NO
+EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE WORK OR ITS USE.
+
+Third-party components
+----------------------
+The font files in the fonts/ directory are not part of the Work. They are the property
+of their respective authors and are distributed under the SIL Open Font License,
+Version 1.1. Their licence texts are included in the fonts/ directory
+(LICENCIA-*.txt).
+
+For permission requests, contact the copyright holder through this GitHub repository.
