@@ -188,50 +188,27 @@ p {
   margin: 0;
 }
 
-/* logo (ovillo y agujas a color + texto que sigue el tema) */
+/* logo: solo el nombre, "DIZZY" grande y "STUDIO" pequeño en magenta (igual que el nombre de la entrada) */
 .logo {
-  position: relative;
-  display: block;
-  aspect-ratio: 760/590;
-  max-width: 100%;
+  display: inline-grid;
+  justify-items: center;
+  gap: 0.06em;
+  font-family: var(--f-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.9;
+  white-space: nowrap;
+  color: var(--ink);
+  transition: color 0.3s;
 }
-.logo i,
-.logo .ltw {
-  position: absolute;
-  inset: 0;
+.logo span:first-child {
+  letter-spacing: 0.01em;
 }
-.logo .lb {
-  background: url("../img/logo/logo-ovillo.svg") center/contain no-repeat;
-}
-.logo .ltail {
-  background: url("../img/logo/logo-hilo.svg") center/contain no-repeat;
-}
-.logo .yl {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
-.logo .yl path {
-  fill: none;
-  stroke: #c2246d;
-  stroke-width: 20;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0;
-}
-.brand .ltw {
-  transform-origin: 50% 63.5%;
-}
-.logo .lt {
-  background: var(--ink);
-  -webkit-mask: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3NjAgNTkwIj48cGF0aCBmaWxsPSIjMDAwIiBkPSJNNDAwIDM3OC40TDQwMCAyMzRMNDM5LjcgMjM0UTQ1NS4zIDIzNCA0NjMuMiAyNDIuN1E0NzEuMSAyNTEuMyA0NzEuMSAyNjhMNDcxLjEgMzM1LjZRNDcxLjEgMzU2LjEgNDYzLjkgMzY3LjNRNDU2LjcgMzc4LjQgNDM4LjcgMzc4LjRaTTQyOS4xIDM1Mi45TDQzNC4xIDM1Mi45UTQ0MiAzNTIuOSA0NDIgMzQ1LjJMNDQyIDI3MC43UTQ0MiAyNjMuNSA0NDAuMSAyNjEuNFE0MzguMiAyNTkuMyA0MzIuMyAyNTkuM0w0MjkuMSAyNTkuM1pNNDg0LjkgMzc4LjRMNDg0LjkgMjM0TDUxMi44IDIzNEw1MTIuOCAzNzguNFpNNTIzLjkgMzc4LjRMNTIzLjkgMzUyLjJMNTU3IDI2MC42TDUyNy4xIDI2MC42TDUyNy4xIDIzNEw1ODcuNCAyMzRMNTg3LjQgMjU5LjNMNTUzLjggMzUxLjlMNTg2IDM1MS45TDU4NiAzNzguNFpNNTk2LjIgMzc4LjRMNTk2LjIgMzUyLjJMNjI5LjMgMjYwLjZMNTk5LjQgMjYwLjZMNTk5LjQgMjM0TDY1OS43IDIzNEw2NTkuNyAyNTkuM0w2MjYuMSAzNTEuOUw2NTguMyAzNTEuOUw2NTguMyAzNzguNFpNNjg5LjggMzc4LjRMNjg5LjggMzMwLjlMNjY2LjcgMjM0TDY5NS40IDIzNEw3MDMuNCAyODIuOUw3MTEuNCAyMzRMNzQwIDIzNEw3MTcgMzMwLjlMNzE3IDM3OC40WiIvPjxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik00MjkuMiA1MTYuMVE0MTMuNyA1MTYuMSA0MDYuOCA1MDguNFE0MDAgNTAwLjcgNDAwIDQ4My45TDQwMCA0NzIuOEw0MjIuNCA0NzIuOEw0MjIuNCA0ODYuOVE0MjIuNCA0OTAuOSA0MjMuNSA0OTMuMVE0MjQuNyA0OTUuMyA0MjcuNyA0OTUuM1E0MzAuOCA0OTUuMyA0MzIgNDkzLjVRNDMzLjEgNDkxLjcgNDMzLjEgNDg3LjZRNDMzLjEgNDgyLjQgNDMyLjEgNDc4LjlRNDMxLjEgNDc1LjQgNDI4LjUgNDcyLjJRNDI2IDQ2OSA0MjEuNSA0NjQuOEw0MTEuNCA0NTUuMVE0MDAgNDQ0LjQgNDAwIDQzMC42UTQwMCA0MTYuMiA0MDYuNyA0MDguNlE0MTMuNCA0MDEgNDI2LjEgNDAxUTQ0MS43IDQwMSA0NDguMiA0MDkuM1E0NTQuNyA0MTcuNiA0NTQuNyA0MzQuNUw0MzEuNyA0MzQuNUw0MzEuNyA0MjYuN1E0MzEuNyA0MjQuNCA0MzAuNCA0MjMuMVE0MjkuMSA0MjEuOCA0MjYuOCA0MjEuOFE0MjQuMSA0MjEuOCA0MjIuOSA0MjMuM1E0MjEuNiA0MjQuOCA0MjEuNiA0MjcuMlE0MjEuNiA0MjkuNiA0MjIuOSA0MzIuM1E0MjQuMiA0MzUuMSA0MjggNDM4LjdMNDQxIDQ1MS4yUTQ0NSA0NTQuOSA0NDguMiA0NTkuMVE0NTEuNSA0NjMuMiA0NTMuNSA0NjguN1E0NTUuNSA0NzQuMiA0NTUuNSA0ODIuMVE0NTUuNSA0OTggNDQ5LjYgNTA3LjFRNDQzLjcgNTE2LjEgNDI5LjIgNTE2LjFaTTQ3NS4zIDUxNS4xTDQ3NS4zIDQyMy43TDQ2MS45IDQyMy43TDQ2MS45IDQwMkw1MTEuNCA0MDJMNTExLjQgNDIzLjdMNDk3LjkgNDIzLjdMNDk3LjkgNTE1LjFaTTU0Ni40IDUxNi4xUTUzMi4zIDUxNi4xIDUyNS42IDUwOC4yUTUxOC45IDUwMC4yIDUxOC45IDQ4NC44TDUxOC45IDQwMkw1NDAuOSA0MDJMNTQwLjkgNDgzLjlRNTQwLjkgNDg2LjcgNTQxLjIgNDg5LjNRNTQxLjUgNDkxLjkgNTQyLjcgNDkzLjZRNTQzLjkgNDk1LjMgNTQ2LjQgNDk1LjNRNTQ5LjEgNDk1LjMgNTUwLjIgNDkzLjZRNTUxLjQgNDkyIDU1MS43IDQ4OS40UTU1MiA0ODYuNyA1NTIgNDgzLjlMNTUyIDQwMkw1NzMuOSA0MDJMNTczLjkgNDg0LjhRNTczLjkgNTAwLjIgNTY3LjIgNTA4LjJRNTYwLjYgNTE2LjEgNTQ2LjQgNTE2LjFaTTU4NS4yIDUxNS4xTDU4NS4yIDQwMkw2MTYuMyA0MDJRNjI4LjUgNDAyIDYzNC43IDQwOC44UTY0MC44IDQxNS42IDY0MC44IDQyOC42TDY0MC44IDQ4MS41UTY0MC44IDQ5Ny42IDYzNS4yIDUwNi4zUTYyOS42IDUxNS4xIDYxNS41IDUxNS4xWk02MDggNDk1LjFMNjExLjkgNDk1LjFRNjE4LjEgNDk1LjEgNjE4LjEgNDg5LjFMNjE4LjEgNDMwLjdRNjE4LjEgNDI1LjEgNjE2LjYgNDIzLjRRNjE1LjEgNDIxLjggNjEwLjUgNDIxLjhMNjA4IDQyMS44Wk02NTEuNyA1MTUuMUw2NTEuNyA0MDJMNjczLjUgNDAyTDY3My41IDUxNS4xWk03MTIuMSA1MTYuMVE2OTguNiA1MTYuMSA2OTEuNCA1MDcuOVE2ODQuMyA0OTkuNyA2ODQuMyA0ODQuMkw2ODQuMyA0MzAuNVE2ODQuMyA0MTYgNjkxLjMgNDA4LjVRNjk4LjQgNDAxIDcxMi4xIDQwMVE3MjUuOCA0MDEgNzMyLjkgNDA4LjVRNzQwIDQxNiA3NDAgNDMwLjVMNzQwIDQ4NC4yUTc0MCA0OTkuNyA3MzIuOCA1MDcuOVE3MjUuNyA1MTYuMSA3MTIuMSA1MTYuMVpNNzEyLjMgNDk1LjNRNzE3LjUgNDk1LjMgNzE3LjUgNDg1LjNMNzE3LjUgNDMwLjJRNzE3LjUgNDIxLjggNzEyLjQgNDIxLjhRNzA2LjggNDIxLjggNzA2LjggNDMwLjRMNzA2LjggNDg1LjVRNzA2LjggNDkwLjcgNzA4LjEgNDkzUTcwOS40IDQ5NS4zIDcxMi4zIDQ5NS4zWiIvPjwvc3ZnPg==)
-    center/contain no-repeat;
-  mask: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3NjAgNTkwIj48cGF0aCBmaWxsPSIjMDAwIiBkPSJNNDAwIDM3OC40TDQwMCAyMzRMNDM5LjcgMjM0UTQ1NS4zIDIzNCA0NjMuMiAyNDIuN1E0NzEuMSAyNTEuMyA0NzEuMSAyNjhMNDcxLjEgMzM1LjZRNDcxLjEgMzU2LjEgNDYzLjkgMzY3LjNRNDU2LjcgMzc4LjQgNDM4LjcgMzc4LjRaTTQyOS4xIDM1Mi45TDQzNC4xIDM1Mi45UTQ0MiAzNTIuOSA0NDIgMzQ1LjJMNDQyIDI3MC43UTQ0MiAyNjMuNSA0NDAuMSAyNjEuNFE0MzguMiAyNTkuMyA0MzIuMyAyNTkuM0w0MjkuMSAyNTkuM1pNNDg0LjkgMzc4LjRMNDg0LjkgMjM0TDUxMi44IDIzNEw1MTIuOCAzNzguNFpNNTIzLjkgMzc4LjRMNTIzLjkgMzUyLjJMNTU3IDI2MC42TDUyNy4xIDI2MC42TDUyNy4xIDIzNEw1ODcuNCAyMzRMNTg3LjQgMjU5LjNMNTUzLjggMzUxLjlMNTg2IDM1MS45TDU4NiAzNzguNFpNNTk2LjIgMzc4LjRMNTk2LjIgMzUyLjJMNjI5LjMgMjYwLjZMNTk5LjQgMjYwLjZMNTk5LjQgMjM0TDY1OS43IDIzNEw2NTkuNyAyNTkuM0w2MjYuMSAzNTEuOUw2NTguMyAzNTEuOUw2NTguMyAzNzguNFpNNjg5LjggMzc4LjRMNjg5LjggMzMwLjlMNjY2LjcgMjM0TDY5NS40IDIzNEw3MDMuNCAyODIuOUw3MTEuNCAyMzRMNzQwIDIzNEw3MTcgMzMwLjlMNzE3IDM3OC40WiIvPjxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik00MjkuMiA1MTYuMVE0MTMuNyA1MTYuMSA0MDYuOCA1MDguNFE0MDAgNTAwLjcgNDAwIDQ4My45TDQwMCA0NzIuOEw0MjIuNCA0NzIuOEw0MjIuNCA0ODYuOVE0MjIuNCA0OTAuOSA0MjMuNSA0OTMuMVE0MjQuNyA0OTUuMyA0MjcuNyA0OTUuM1E0MzAuOCA0OTUuMyA0MzIgNDkzLjVRNDMzLjEgNDkxLjcgNDMzLjEgNDg3LjZRNDMzLjEgNDgyLjQgNDMyLjEgNDc4LjlRNDMxLjEgNDc1LjQgNDI4LjUgNDcyLjJRNDI2IDQ2OSA0MjEuNSA0NjQuOEw0MTEuNCA0NTUuMVE0MDAgNDQ0LjQgNDAwIDQzMC42UTQwMCA0MTYuMiA0MDYuNyA0MDguNlE0MTMuNCA0MDEgNDI2LjEgNDAxUTQ0MS43IDQwMSA0NDguMiA0MDkuM1E0NTQuNyA0MTcuNiA0NTQuNyA0MzQuNUw0MzEuNyA0MzQuNUw0MzEuNyA0MjYuN1E0MzEuNyA0MjQuNCA0MzAuNCA0MjMuMVE0MjkuMSA0MjEuOCA0MjYuOCA0MjEuOFE0MjQuMSA0MjEuOCA0MjIuOSA0MjMuM1E0MjEuNiA0MjQuOCA0MjEuNiA0MjcuMlE0MjEuNiA0MjkuNiA0MjIuOSA0MzIuM1E0MjQuMiA0MzUuMSA0MjggNDM4LjdMNDQxIDQ1MS4yUTQ0NSA0NTQuOSA0NDguMiA0NTkuMVE0NTEuNSA0NjMuMiA0NTMuNSA0NjguN1E0NTUuNSA0NzQuMiA0NTUuNSA0ODIuMVE0NTUuNSA0OTggNDQ5LjYgNTA3LjFRNDQzLjcgNTE2LjEgNDI5LjIgNTE2LjFaTTQ3NS4zIDUxNS4xTDQ3NS4zIDQyMy43TDQ2MS45IDQyMy43TDQ2MS45IDQwMkw1MTEuNCA0MDJMNTExLjQgNDIzLjdMNDk3LjkgNDIzLjdMNDk3LjkgNTE1LjFaTTU0Ni40IDUxNi4xUTUzMi4zIDUxNi4xIDUyNS42IDUwOC4yUTUxOC45IDUwMC4yIDUxOC45IDQ4NC44TDUxOC45IDQwMkw1NDAuOSA0MDJMNTQwLjkgNDgzLjlRNTQwLjkgNDg2LjcgNTQxLjIgNDg5LjNRNTQxLjUgNDkxLjkgNTQyLjcgNDkzLjZRNTQzLjkgNDk1LjMgNTQ2LjQgNDk1LjNRNTQ5LjEgNDk1LjMgNTUwLjIgNDkzLjZRNTUxLjQgNDkyIDU1MS43IDQ4OS40UTU1MiA0ODYuNyA1NTIgNDgzLjlMNTUyIDQwMkw1NzMuOSA0MDJMNTczLjkgNDg0LjhRNTczLjkgNTAwLjIgNTY3LjIgNTA4LjJRNTYwLjYgNTE2LjEgNTQ2LjQgNTE2LjFaTTU4NS4yIDUxNS4xTDU4NS4yIDQwMkw2MTYuMyA0MDJRNjI4LjUgNDAyIDYzNC43IDQwOC44UTY0MC44IDQxNS42IDY0MC44IDQyOC42TDY0MC44IDQ4MS41UTY0MC44IDQ5Ny42IDYzNS4yIDUwNi4zUTYyOS42IDUxNS4xIDYxNS41IDUxNS4xWk02MDggNDk1LjFMNjExLjkgNDk1LjFRNjE4LjEgNDk1LjEgNjE4LjEgNDg5LjFMNjE4LjEgNDMwLjdRNjE4LjEgNDI1LjEgNjE2LjYgNDIzLjRRNjE1LjEgNDIxLjggNjEwLjUgNDIxLjhMNjA4IDQyMS44Wk02NTEuNyA1MTUuMUw2NTEuNyA0MDJMNjczLjUgNDAyTDY3My41IDUxNS4xWk03MTIuMSA1MTYuMVE2OTguNiA1MTYuMSA2OTEuNCA1MDcuOVE2ODQuMyA0OTkuNyA2ODQuMyA0ODQuMkw2ODQuMyA0MzAuNVE2ODQuMyA0MTYgNjkxLjMgNDA4LjVRNjk4LjQgNDAxIDcxMi4xIDQwMVE3MjUuOCA0MDEgNzMyLjkgNDA4LjVRNzQwIDQxNiA3NDAgNDMwLjVMNzQwIDQ4NC4yUTc0MCA0OTkuNyA3MzIuOCA1MDcuOVE3MjUuNyA1MTYuMSA3MTIuMSA1MTYuMVpNNzEyLjMgNDk1LjNRNzE3LjUgNDk1LjMgNzE3LjUgNDg1LjNMNzE3LjUgNDMwLjJRNzE3LjUgNDIxLjggNzEyLjQgNDIxLjhRNzA2LjggNDIxLjggNzA2LjggNDMwLjRMNzA2LjggNDg1LjVRNzA2LjggNDkwLjcgNzA4LjEgNDkzUTcwOS40IDQ5NS4zIDcxMi4zIDQ5NS4zWiIvPjwvc3ZnPg==)
-    center/contain no-repeat;
-  transition: background 0.3s;
+.logo span:last-child {
+  font-size: 0.28em;
+  letter-spacing: 0.32em;
+  margin-right: -0.32em;
+  color: var(--accent);
 }
 
 /* avisos */
@@ -344,13 +321,13 @@ nav.main a:hover::after {
   display: block;
 }
 .brand .logo {
-  height: 66px;
+  font-size: 44px;
   transition:
-    height 0.35s var(--ease),
+    font-size 0.35s var(--ease),
     transform 0.5s var(--ease);
 }
 header.top.scrolled .brand .logo {
-  height: 54px;
+  font-size: 36px;
 }
 .tools {
   justify-self: end;
@@ -419,7 +396,7 @@ header.top.scrolled .brand .logo {
     grid-template-columns: auto 1fr;
   }
   .brand .logo {
-    height: 54px;
+    font-size: 38px;
   }
 }
 
@@ -1455,7 +1432,7 @@ footer {
   color: var(--accent);
 }
 .foot .about .logo {
-  width: min(200px, 55vw);
+  font-size: 64px;
 }
 .foot .about p {
   color: var(--muted);
@@ -1829,7 +1806,7 @@ footer {
   }
 }
 
-/* ===== Entrada: la lana se descose, el nombre se enrolla en una bola y vuela al logo ===== */
+/* ===== Entrada: la lana se descose y el nombre vuela a la cabecera, donde pasa a ser el logo ===== */
 .intro-lock,
 .intro-lock body {
   overflow: hidden;
@@ -1837,7 +1814,7 @@ footer {
 .intro-hold .hero h1 span {
   animation-play-state: paused;
 }
-.intro-lock #headLogo .lb {
+.intro-lock #headLogo {
   visibility: hidden;
 }
 .intro {
@@ -1879,8 +1856,10 @@ footer {
   transform: translate(-50%, -50%);
   display: grid;
   justify-items: center;
-  gap: 10px;
+  /* mismas proporciones que .logo, para que al llegar a la cabecera encaje exacto */
+  gap: 0.06em;
   font-family: var(--f-display);
+  font-size: clamp(76px, 15vw, 180px);
   font-weight: 400;
   text-transform: uppercase;
   line-height: 0.9;
@@ -1889,15 +1868,15 @@ footer {
   white-space: nowrap;
   pointer-events: none;
   transition:
+    transform 0.75s cubic-bezier(0.7, 0, 0.25, 1),
     color 0.35s ease 0.95s,
     text-shadow 0.35s ease 0.95s;
 }
 .intro-brand span:first-child {
-  font-size: clamp(76px, 15vw, 180px);
   letter-spacing: 0.01em;
 }
 .intro-brand span:last-child {
-  font-size: clamp(22px, 4.2vw, 50px);
+  font-size: 0.28em;
   letter-spacing: 0.32em;
   margin-right: -0.32em;
   transition: color 0.35s ease 0.95s;
@@ -1907,38 +1886,7 @@ footer {
   text-shadow: none;
 }
 .intro.unravel .intro-brand span:last-child {
-  color: #b5195f;
-}
-/* cada letra gira hacia el centro como si se enrollara */
-.intro-brand i {
-  display: inline-block;
-  font-style: normal;
-  transition:
-    transform 0.6s cubic-bezier(0.6, 0, 0.4, 1),
-    opacity 0.5s ease;
-}
-.intro.wind .intro-brand i {
-  transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0.1);
-  opacity: 0;
-}
-/* la bola: aparece girando y luego vuela al logo de la cabecera */
-.intro-ball {
-  position: absolute;
-  aspect-ratio: 760 / 590;
-  transform-origin: 0 0;
-  transition: transform 0.75s cubic-bezier(0.7, 0, 0.25, 1);
-  pointer-events: none;
-}
-.intro-ball i {
-  position: absolute;
-  inset: 0;
-  background: url("../img/logo/logo-ovillo.svg") center / contain no-repeat;
-  transform-origin: 25.9% 64.3%;
-  transform: scale(0) rotate(-540deg);
-  transition: transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.15) 0.12s;
-}
-.intro.wind .intro-ball i {
-  transform: none;
+  color: var(--accent);
 }
 .intro-skip {
   position: absolute;
@@ -1956,7 +1904,7 @@ footer {
   text-transform: uppercase;
   transition: opacity 0.4s;
 }
-.intro.wind .intro-skip {
+.intro.fly .intro-skip {
   opacity: 0;
 }
 .intro-skip:hover {
@@ -2190,7 +2138,7 @@ footer {
   color: var(--muted);
 }
 .empty .logo {
-  width: 150px;
+  font-size: 56px;
 }
 .totals {
   border-top: 1px solid var(--line);

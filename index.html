@@ -8,7 +8,7 @@
       name="description"
       content="Dizzy Studio: chunky-knit sweaters, cardigans and accessories in colours with attitude."
     />
-    <link rel="icon" type="image/svg+xml" href="img/logo/favicon.svg" />
+    <link rel="icon" href="data:," />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
@@ -33,29 +33,16 @@
     <div class="intro" id="intro">
       <div class="intro-yarn" id="introYarn" aria-hidden="true"><div class="intro-veil"></div><div class="intro-base"></div></div>
       <div class="intro-brand" id="introBrand" aria-hidden="true"><span>Dizzy</span><span>Studio</span></div>
-      <div class="intro-ball" id="introBall" aria-hidden="true"><i></i></div>
       <button class="intro-skip" id="introSkip" type="button" data-i18n="intro.skip">Skip intro</button>
     </div>
     <div class="progress" aria-hidden="true"><i id="progress"></i></div>
-    <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
-      <filter id="unravel" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
-        <feTurbulence type="fractalNoise" baseFrequency="0.02 0.22" numOctaves="2" seed="4" />
-        <feDisplacementMap id="disp" in="SourceGraphic" scale="0" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-    </svg>
     <div class="notice" id="notice" aria-live="off"></div>
 
     <header class="top" id="top">
       <div class="wrap">
         <a class="brand" href="#inicio" aria-label="Dizzy Studio, home" data-i18n-attr="aria-label:a.home"
-          ><span class="logo" id="headLogo" aria-hidden="true"
-            ><svg class="yl" viewBox="0 0 760 590">
-              <path
-                pathLength="1"
-                d="M200 378 C 300 378, 352 362, 404 372 S 508 390, 560 374 S 660 358, 716 374"
-              /></svg
-            ><i class="lb"></i><i class="ltail"></i><span class="ltw"><i class="lt"></i></span></span
-        ></a>
+          ><span class="logo" id="headLogo" aria-hidden="true"><span>Dizzy</span><span>Studio</span></span></a
+        >
         <nav class="main" aria-label="Main" data-i18n-attr="aria-label:a.main">
           <a href="#novedades" data-i18n="nav.new">New in</a>
           <a href="#novedades" data-jump="sweaters" data-i18n="nav.sweaters">Sweaters</a>
@@ -481,9 +468,8 @@
         <div class="foot">
           <div class="about">
             <a href="#inicio" aria-label="Dizzy Studio, back to top" data-i18n-attr="aria-label:a.backTop" style="display: inline-block"
-              ><span class="logo" aria-hidden="true"
-                ><i class="lb"></i><i class="ltail"></i><span class="ltw"><i class="lt"></i></span></span
-            ></a>
+              ><span class="logo" aria-hidden="true"><span>Dizzy</span><span>Studio</span></span></a
+            >
             <p data-i18n="foot.about">Chunky knits, colour with attitude and limited editions.</p>
           </div>
           <div>

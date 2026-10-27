@@ -1,9 +1,6 @@
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="img/logo/dizzy-studio-logo-blanco.svg">
-  <img src="img/logo/dizzy-studio-logo.svg" alt="Dizzy Studio" width="340">
-</picture>
+# DIZZY STUDIO
 
 ### Chunky knitwear in colours you can spot from across the street.
 
@@ -46,7 +43,7 @@ straight from the file system with a double click on `index.html`.
 - **Bag and favourites** that are kept in the browser between visits.
 - **Three languages**: English, Spanish and Simplified Chinese, switched instantly.
 - **Light and dark mode**.
-- **Animated yarn intro**: the page opens covered in magenta yarn that unravels to reveal the logo.
+- **Animated yarn intro**: the page opens covered in magenta yarn that unravels to reveal the brand name.
 - **Responsive** down to 390 px wide, and every animation respects `prefers-reduced-motion`.
 
 ## 🚀 Run it locally
