@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="img/logo/dizzy-studio-logo-blanco.png">
-  <img src="img/logo/dizzy-studio-logo.png" alt="Dizzy Studio" width="340">
+  <source media="(prefers-color-scheme: dark)" srcset="img/logo/dizzy-studio-logo-blanco.svg">
+  <img src="img/logo/dizzy-studio-logo.svg" alt="Dizzy Studio" width="340">
 </picture>
 
 ### Chunky knitwear in colours you can spot from across the street.
