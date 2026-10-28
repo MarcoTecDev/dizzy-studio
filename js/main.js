@@ -419,7 +419,7 @@
     b.classList.add("bump");
   }
   const LOGO =
-    '<span class="logo" aria-hidden="true"><i class="lb"></i><i class="ltail"></i><span class="ltw"><i class="lt"></i></span></span>';
+    '<span class="logo" aria-hidden="true"><span>Dizzy</span><span>Studio</span></span>';
   function renderCart() {
     store.set("dizzy-cart2", cart);
     const count = cart.reduce((a, b) => a + b.qty, 0);
@@ -879,7 +879,6 @@
     prog.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
     header.classList.toggle("scrolled", y > 10);
     if (knitRect) knit(knitRect);
-    unravel(y);
     if (onWest) {
       // página Rodeo:
       // · las dos palabras del título se separan, la tarjeta del duelo se abre hasta ocupar su sitio
@@ -914,37 +913,6 @@
       ws.style.transform = `translate3d(0,${((wsRect.top - vh / 2) * -0.12).toFixed(1)}px,0) scale(1.12)`;
     }
   }
-  /* logo: las letras se deshacen en hilo y el ovillo lo recoge */
-  const hl = $("#headLogo"),
-    hlText = hl.querySelector(".lt"),
-    hlWrap = hl.querySelector(".ltw"),
-    hlTail = hl.querySelector(".ltail"),
-    hlPath = hl.querySelector(".yl path"),
-    disp = $("#disp");
-  const cl = (v) => Math.min(1, Math.max(0, v));
-  let lastP = -1;
-  function unravel(y) {
-    const p = reduce ? (y > 60 ? 1 : 0) : cl(y / 300);
-    if (Math.abs(p - lastP) < 0.002) return;
-    lastP = p;
-    /* 1. las letras se aplastan en una línea ondulada magenta */
-    const melt = cl(p / 0.4);
-    disp.setAttribute("scale", (melt * 18).toFixed(1));
-    hlText.style.background = `color-mix(in srgb, #C2246D ${Math.round(melt * 100)}%, var(--ink))`;
-    hlWrap.style.transform = `scaleY(${(1 - melt * 0.93).toFixed(3)})`;
-    /* 2. esa línea pasa a ser el hilo */
-    const swap = cl((p - 0.3) / 0.14);
-    hlWrap.style.opacity = String(1 - swap);
-    // el filtro de ondas es costoso: solo se aplica mientras las letras se están deshaciendo
-    hlWrap.style.filter = melt > 0 && swap < 1 ? "url(#unravel)" : "none";
-    hlWrap.style.visibility = swap >= 1 ? "hidden" : "visible";
-    /* 3. el hilo se recoge y se mete dentro del ovillo */
-    const reel = cl((p - 0.44) / 0.56);
-    const len = 1 - reel;
-    hlPath.style.opacity = (swap * (len > 0.002 ? 1 : 0)).toFixed(3);
-    hlPath.style.strokeDasharray = `${len.toFixed(4)} 2`;
-    hlTail.style.clipPath = `inset(0 ${(reel * 52).toFixed(2)}% 0 0)`;
-  }
   words.forEach((w) =>
     w.addEventListener("animationend", () => {
       w.style.animation = "none";
@@ -968,8 +936,7 @@
 
   /* ---------- entrada ----------
      1) La web aparece tapada por lana y los hilos se descosen solos (2 s), dejando "DIZZY STUDIO" en el centro.
-     2) El nombre se enrolla en una bola de lana.
-     3) La bola vuela hasta el logo pequeño de la cabecera.
+     2) El nombre vuela hasta la cabecera y se queda como logo (tiene sus mismas proporciones).
      Un clic en cualquier sitio (o Escape) salta la entrada. */
   let intro = $("#intro");
   // copia intacta de la entrada: la bola de lana de la portada la vuelve a reproducir
@@ -978,8 +945,7 @@
   const UNRAVEL_MS = 2000; // duración del descosido
   function startIntro() {
     const holder = $("#introYarn"),
-      brand = $("#introBrand"),
-      ball = $("#introBall");
+      brand = $("#introBrand");
     const YARN = ["#B5195F", "#C42A6B", "#A3154F", "#D23C7E", "#B81F62"];
     // velo claro (para que el nombre no se mezcle con la portada) y fieltro magenta encima: están en el HTML
     // para que la pantalla salga magenta desde el primer instante
@@ -1122,11 +1088,6 @@
       });
       if (busy) raf = requestAnimationFrame(frame);
     }
-    // "DIZZY STUDIO" letra a letra, para poder enrollarlas en la bola
-    brand.querySelectorAll("span").forEach((w) => {
-      w.innerHTML = [...w.textContent].map((ch) => `<i>${ch}</i>`).join("");
-    });
-
     function run() {
       const t = performance.now();
       // las capas se descosen escalonadas, de la de arriba a la de abajo, en UNRAVEL_MS
@@ -1140,35 +1101,16 @@
       requestAnimationFrame(() => (base.style.opacity = "0"));
       intro.classList.add("unravel");
       raf = requestAnimationFrame(frame);
-      later(windUp, UNRAVEL_MS + 150);
+      later(flyHome, UNRAVEL_MS + 150);
     }
-    // el nombre se enrolla: las letras giran hacia el centro y aparece la bola de lana
-    function windUp() {
-      const r = brand.getBoundingClientRect(),
-        cx = r.left + r.width / 2,
-        cy = r.top + r.height / 2;
-      [...brand.querySelectorAll("i")].forEach((el, n, all) => {
-        const b = el.getBoundingClientRect();
-        el.style.setProperty("--dx", `${(cx - (b.left + b.width / 2)).toFixed(1)}px`);
-        el.style.setProperty("--dy", `${(cy - (b.top + b.height / 2)).toFixed(1)}px`);
-        el.style.setProperty("--rot", `${n % 2 ? 300 : -300}deg`);
-        el.style.transitionDelay = `${(Math.abs(n - all.length / 2) * 18).toFixed(0)}ms`;
-      });
-      // la bola se coloca para que su centro quede en el centro del nombre
-      const bw = Math.min(260, innerWidth * 0.55),
-        bh = bw * (590 / 760);
-      ball.style.width = bw + "px";
-      ball.style.left = cx - bw * 0.259 + "px";
-      ball.style.top = cy - bh * 0.643 + "px";
-      intro.classList.add("wind");
-      later(flyHome, 700);
-    }
-    // la bola vuela hasta el logo de la cabecera (mismo dibujo, así que encaja exacto)
+    // el nombre vuela hasta el logo de la cabecera (mismo texto y proporciones, así que encaja exacto)
     function flyHome() {
       const target = $("#headLogo").getBoundingClientRect(),
-        from = ball.getBoundingClientRect();
-      const s = target.width / from.width;
-      ball.style.transform = `translate(${(target.left - from.left).toFixed(1)}px, ${(target.top - from.top).toFixed(1)}px) scale(${s.toFixed(4)})`;
+        from = brand.getBoundingClientRect();
+      const s = target.width / from.width,
+        dx = target.left + target.width / 2 - (from.left + from.width / 2),
+        dy = target.top + target.height / 2 - (from.top + from.height / 2);
+      brand.style.transform = `translate(-50%, -50%) translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) scale(${s.toFixed(4)})`;
       intro.classList.add("fly");
       root.classList.remove("intro-hold"); // arranca la animación del titular de la portada
       later(finish, 760);
