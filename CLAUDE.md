@@ -24,4 +24,7 @@ El propietario es Marco; háblale en español.
 
 ## Git
 - Rama principal `main`. Commits pequeños con mensaje en español que diga qué cambia.
+- Todos los commits van solo a nombre de MarcoTecDev (`Marco <marcoanimation.com@gmail.com>`).
+  Nunca añadir líneas `Co-Authored-By`, `Claude-Session` ni ningún otro autor o coautor: en GitHub solo
+  debe salir MarcoTecDev como contribuidor.
 - Antes de subir: revisar que no hay errores en la consola del navegador.
