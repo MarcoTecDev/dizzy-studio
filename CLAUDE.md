@@ -4,8 +4,10 @@ Tienda online de ropa (marca Dizzy Studio) hecha con HTML, CSS y JavaScript puro
 El propietario es Marco; háblale en español.
 
 ## Estructura
-- `index.html`: una sola página con tres vistas: tienda de lana (`#inicio`), cápsula High Noon (`#high-noon`)
-  y ficha de prenda (`#<id>` o `#<id>-<color>`). Arriba están la entrada de lana y la de la estrella.
+- `index.html`: una sola página con cuatro vistas: portada con el logo y los drops (`#home` o sin #),
+  tienda de lana (`#inicio`), cápsula Rodeo (`#rodeo`, antes High Noon) y ficha de prenda (`#<id>` o
+  `#<id>-<color>`). Arriba están la entrada de lana y la de la estrella. Cada drop tiene su propio menú y
+  no enlaza al otro: se cambia de drop desde la portada.
 - `css/styles.css`: tokens de color en `:root` (claro) y `:root[data-look="dark"]` (oscuro);
   el tema western usa `:root.theme-west`. Fuentes propias en `fonts/` con `@font-face`.
 - `js/i18n.js`: textos en `en`, `es` y `zh`. Cualquier clave nueva va en los tres bloques.

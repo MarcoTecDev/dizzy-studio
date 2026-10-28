@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <!-- Entrada de High Noon: estrella de sheriff (6 fotogramas, de 0 a 5 agujeros) que se agujerea y se cae. Código en main.js, busca "estrella" -->
+    <!-- Entrada de Rodeo: estrella de sheriff (6 fotogramas, de 0 a 5 agujeros) que se agujerea y se cae. Código en main.js, busca "estrella" -->
     <div class="sheriff" id="sheriff" hidden>
       <div class="sh-dust" id="shDust"></div>
       <div class="sh-stage" id="shStage">
@@ -26,7 +26,7 @@
         </div>
         <span class="sh-nail" aria-hidden="true"></span>
       </div>
-      <span class="sh-label">Drop 02 · High Noon</span>
+      <span class="sh-label">Drop 02 · Rodeo</span>
       <button class="intro-skip sh-skip" type="button" data-i18n="intro.skip">Skip intro</button>
     </div>
 
@@ -47,7 +47,7 @@
 
     <header class="top" id="top">
       <div class="wrap">
-        <a class="brand" href="#inicio" aria-label="Dizzy Studio, home" data-i18n-attr="aria-label:a.home"
+        <a class="brand" href="#home" aria-label="Dizzy Studio, home" data-i18n-attr="aria-label:a.home"
           ><span class="logo" id="headLogo" aria-hidden="true"
             ><svg class="yl" viewBox="0 0 760 590">
               <path
@@ -56,13 +56,18 @@
               /></svg
             ><i class="lb"></i><i class="ltail"></i><span class="ltw"><i class="lt"></i></span></span
         ></a>
-        <nav class="main" aria-label="Main" data-i18n-attr="aria-label:a.main">
+        <nav class="main nav-knit" aria-label="Main" data-i18n-attr="aria-label:a.main">
           <a href="#novedades" data-i18n="nav.new">New in</a>
           <a href="#novedades" data-jump="sweaters" data-i18n="nav.sweaters">Sweaters</a>
           <a href="#novedades" data-jump="accessories" data-i18n="nav.accessories">Accessories</a>
           <a href="#lookbook" data-i18n="nav.lookbook">Lookbook</a>
           <a href="#taller" data-i18n="nav.workshop">The workshop</a>
-          <a href="#high-noon" class="nav-west"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.4 6.3 6.6.3-5.2 4.2 1.8 6.4L12 16l-5.6 3.7 1.8-6.4L3 9.1l6.6-.3z"/></svg><span>High Noon</span></a>
+        </nav>
+        <nav class="main nav-rodeo" aria-label="Rodeo">
+          <a href="#w-shop" data-i18n="w.gridK">The capsule</a>
+          <a href="#w-lb" data-i18n="w.lbK">Lookbook</a>
+          <a href="#w-fit" data-i18n="w.uniK">Size guide</a>
+          <a href="#custom" class="nav-west"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.4 6.3 6.6.3-5.2 4.2 1.8 6.4L12 16l-5.6 3.7 1.8-6.4L3 9.1l6.6-.3z"/></svg><span data-i18n="w.custK">Make it yours</span></a>
         </nav>
         <div class="tools">
           <div class="lang" role="group" aria-label="Language" data-i18n-attr="aria-label:a.lang">
@@ -97,6 +102,41 @@
         </div>
       </div>
     </header>
+
+    <!-- Portada: solo el logo y los dos drops. La bola de lana lleva a la tienda de punto y la estrella a Rodeo -->
+    <main id="home" class="home" hidden>
+      <div class="home-lang">
+          <div class="lang" role="group" aria-label="Language" data-i18n-attr="aria-label:a.lang">
+            <button data-lang="en" lang="en" aria-pressed="true">EN</button
+            ><button data-lang="es" lang="es" aria-pressed="false">ES</button
+            ><button data-lang="zh" lang="zh-Hans" aria-pressed="false">中文</button>
+          </div>
+      </div>
+      <div class="home-in">
+        <h1 class="home-logo">
+          <span class="sr">Dizzy Studio</span>
+        <svg class="home-svg" viewBox="0 0 412.6 256.9" aria-hidden="true" focusable="false">
+          <path class="hl-a" d="M8 179.9L8 8L55.3 8Q73.8 8 83.2 18.3Q92.6 28.6 92.6 48.4L92.6 128.9Q92.6 153.3 84 166.6Q75.5 179.9 54.1 179.9ZM42.6 149.5L48.5 149.5Q58 149.5 58 140.3L58 51.7Q58 43.1 55.7 40.6Q53.4 38.1 46.4 38.1L42.6 38.1ZM107.1 179.9L107.1 8L140.3 8L140.3 179.9ZM151.5 179.9L151.5 148.6L190.8 39.6L155.3 39.6L155.3 8L227 8L227 38.1L187 148.2L225.4 148.2L225.4 179.9ZM235.5 179.9L235.5 148.6L274.8 39.6L239.3 39.6L239.3 8L311.1 8L311.1 38.1L271 148.2L309.4 148.2L309.4 179.9ZM344.8 179.9L344.8 123.3L317.4 8L351.4 8L361 66.2L370.6 8L404.6 8L377.2 123.3L377.2 179.9Z"/>
+          <path class="hl-b" d="M104.3 248.9Q97.7 248.9 94.8 245.6Q91.9 242.3 91.9 235.1L91.9 230.4L101.4 230.4L101.4 236.5Q101.4 238.1 101.9 239.1Q102.4 240 103.7 240Q105 240 105.5 239.3Q106 238.5 106 236.7Q106 234.5 105.6 233Q105.1 231.5 104.1 230.2Q103 228.8 101.1 227L96.8 222.9Q91.9 218.4 91.9 212.5Q91.9 206.3 94.8 203.1Q97.6 199.9 103 199.9Q109.7 199.9 112.4 203.4Q115.2 206.9 115.2 214.1L105.4 214.1L105.4 210.8Q105.4 209.8 104.9 209.3Q104.3 208.7 103.3 208.7Q102.2 208.7 101.7 209.4Q101.1 210 101.1 211Q101.1 212 101.7 213.2Q102.2 214.4 103.8 215.9L109.4 221.3Q111.1 222.8 112.4 224.6Q113.8 226.4 114.7 228.7Q115.5 231 115.5 234.4Q115.5 241.2 113 245Q110.5 248.9 104.3 248.9ZM140.8 248.4L140.8 209.6L135.1 209.6L135.1 200.3L156.1 200.3L156.1 209.6L150.4 209.6L150.4 248.4ZM187.9 248.9Q181.8 248.9 179 245.5Q176.1 242.1 176.1 235.6L176.1 200.3L185.5 200.3L185.5 235.2Q185.5 236.4 185.6 237.5Q185.8 238.6 186.3 239.3Q186.8 240 187.9 240Q189 240 189.5 239.3Q190 238.6 190.1 237.5Q190.2 236.4 190.2 235.2L190.2 200.3L199.6 200.3L199.6 235.6Q199.6 242.1 196.7 245.5Q193.9 248.9 187.9 248.9ZM221.2 248.4L221.2 200.3L234.4 200.3Q239.6 200.3 242.2 203.2Q244.8 206.1 244.8 211.6L244.8 234.2Q244.8 241 242.5 244.7Q240.1 248.4 234.1 248.4ZM230.8 239.9L232.5 239.9Q235.2 239.9 235.2 237.4L235.2 212.5Q235.2 210.1 234.5 209.4Q233.9 208.7 231.9 208.7L230.8 208.7ZM266.3 248.4L266.3 200.3L275.6 200.3L275.6 248.4ZM308.8 248.9Q303 248.9 300 245.4Q296.9 241.9 296.9 235.3L296.9 212.5Q296.9 206.3 300 203.1Q303 199.9 308.8 199.9Q314.6 199.9 317.6 203.1Q320.7 206.3 320.7 212.5L320.7 235.3Q320.7 241.9 317.6 245.4Q314.6 248.9 308.8 248.9ZM308.9 240Q311.1 240 311.1 235.8L311.1 212.3Q311.1 208.7 308.9 208.7Q306.5 208.7 306.5 212.4L306.5 235.8Q306.5 238.1 307.1 239Q307.6 240 308.9 240Z"/>
+        </svg>
+        </h1>
+        <p class="home-k" data-i18n="home.k">Choose your drop</p>
+        <nav class="home-drops" aria-label="Drops" data-i18n-attr="aria-label:home.k">
+          <a class="drop drop-knit" id="dropKnit" href="#inicio">
+            <span class="drop-art" aria-hidden="true"><span class="drop-glow"></span><img src="img/logo/ovillo-portada.webp" alt="" width="520" height="520" decoding="async" /></span>
+            <span class="drop-n">Drop 01</span>
+            <span class="drop-name" data-i18n="home.knit">Knit</span>
+            <span class="drop-go"><span data-i18n="home.enter">Enter</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+          </a>
+          <a class="drop drop-rodeo" id="dropRodeo" href="#rodeo">
+            <span class="drop-art" aria-hidden="true"><span class="drop-glow"></span><span class="drop-swing"><img src="img/west/estrella/estrella-0.webp" alt="" width="900" height="900" decoding="async" /></span><span class="drop-nail"></span></span>
+            <span class="drop-n">Drop 02</span>
+            <span class="drop-name">Rodeo</span>
+            <span class="drop-go"><span data-i18n="home.enter">Enter</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+          </a>
+        </nav>
+      </div>
+    </main>
 
     <main id="inicio">
       <section class="hero" style="padding-block: 0">
@@ -139,33 +179,6 @@
 
       <div class="ticker" aria-hidden="true"><div class="row" id="ticker"></div></div>
 
-      <!-- Drop 02 · High Noon: tarjeta compacta en la portada -->
-      <section class="west-teaser" id="drop02" aria-labelledby="wtTitle">
-        <div class="wrap">
-          <a class="wt" href="#high-noon" data-reveal>
-            <span class="wt-img">
-              <img
-                id="wtImg"
-                src="img/west/sm/duelo.webp"
-                srcset="img/west/sm/duelo.webp 900w, img/west/duelo.webp 2000w"
-                sizes="(max-width: 760px) 120px, 420px"
-                alt="Two models in a desert duel, pointing at each other with finger guns"
-                data-i18n-attr="alt:wt.alt"
-                width="900"
-                height="503"
-                loading="lazy"
-                decoding="async"
-              />
-            </span>
-            <span class="wt-copy">
-              <span class="wt-kicker"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.4 6.3 6.6.3-5.2 4.2 1.8 6.4L12 16l-5.6 3.7 1.8-6.4L3 9.1l6.6-.3z"/></svg><span data-i18n="wt.kicker">Drop 02 · Unisex capsule</span></span>
-              <span class="wt-h" id="wtTitle">High Noon</span>
-              <span class="wt-p" data-i18n="wt.p">Denim, leather and dust. A unisex western capsule for the showdown. No weapons, just attitude.</span>
-            </span>
-            <span class="wt-go"><span data-i18n="wt.cta">Enter the desert</span><i><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg></i></span>
-          </a>
-        </div>
-      </section>
 
       <section id="novedades">
         <div class="wrap">
@@ -382,15 +395,15 @@
       </section>
     </main>
 
-    <!-- Página de la cápsula High Noon (se abre con #high-noon) -->
+    <!-- Página de la cápsula Rodeo (se abre con #rodeo) -->
     <main id="west" hidden>
       <section class="w-hero">
         <div class="wrap">
           <div class="w-meta">
-            <span class="w-kicker"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.4 6.3 6.6.3-5.2 4.2 1.8 6.4L12 16l-5.6 3.7 1.8-6.4L3 9.1l6.6-.3z"/></svg><span data-i18n="wt.kicker">Drop 02 · Unisex capsule</span></span>
-            <span class="w-meta-r">SS27 · 05 / 05</span>
+            <span class="w-kicker"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.4 6.3 6.6.3-5.2 4.2 1.8 6.4L12 16l-5.6 3.7 1.8-6.4L3 9.1l6.6-.3z"/></svg><span data-i18n="wt.kicker">Drop 02 · Western capsule</span></span>
+            <span class="w-meta-r">SS27 · Dizzy Studio</span>
           </div>
-          <h1 class="w-title" id="wTitle"><span>High</span> <span>Noon</span></h1>
+          <h1 class="w-title" id="wTitle"><span>Dizzy</span> <span>Rodeo</span></h1>
           <div class="w-card" id="wCard">
             <img
               id="wHeroImg"
@@ -407,17 +420,17 @@
             <svg class="w-badge" viewBox="0 0 200 200" aria-hidden="true">
                 <defs><path id="wbCircle" d="M100 100m-74 0a74 74 0 1 1 148 0a74 74 0 1 1-148 0" /></defs>
                 <circle cx="100" cy="100" r="96" />
-                <g class="w-badge-ring"><text><textPath href="#wbCircle" textLength="462" lengthAdjust="spacing">DROP 02 • HIGH NOON • UNISEX • DIZZY STUDIO • </textPath></text></g>
+                <g class="w-badge-ring"><text><textPath href="#wbCircle" textLength="462" lengthAdjust="spacing">DROP 02 • RODEO • DIZZY STUDIO • WESTERN • </textPath></text></g>
                 <path class="w-badge-star" d="M100 62l9.5 24.6 26.4 1.3-20.6 16.5 7 25.5L100 115.5l-22.3 14.4 7-25.5-20.6-16.5 26.4-1.3z" />
               </svg>
           </div>
           <div class="w-intro">
             <p class="w-lead" data-i18n="w.p">
-              Five pieces, two belt colours and one rule: whoever draws first with their fingers wins. Every piece is unisex and cut to be shared.
+              Eight pieces, two belt colours and one rule: whoever draws first with their fingers wins.
             </p>
             <ul class="w-stats">
-              <li><b>05</b><span data-i18n="w.s1">Pieces</span></li>
-              <li><b>1</b><span data-i18n="w.s2">Fit for everyone</span></li>
+              <li><b id="wCount">08</b><span data-i18n="w.s1">Pieces</span></li>
+              <li><b id="wAcc">04</b><span data-i18n="w.s2">Accessories</span></li>
               <li><b id="wFrom">€49</b><span data-i18n="w.s3">Starting price</span></li>
             </ul>
             <div class="w-ctas">
@@ -443,7 +456,7 @@
         </div>
       </section>
 
-      <section class="w-lb" id="wLb" aria-labelledby="wLbH">
+      <section class="w-lb" id="w-lb" aria-labelledby="wLbH">
         <div class="w-lb-pin">
           <div class="wrap w-lb-head">
             <span class="kicker" data-i18n="w.lbK">Lookbook</span>
@@ -453,14 +466,14 @@
         </div>
       </section>
 
-      <section class="w-unisex">
+      <section class="w-fitsec" id="w-fit">
         <div class="wrap">
           <div class="sec-head" data-reveal>
             <div class="l">
-              <span class="kicker" data-i18n="w.uniK">Unisex</span>
-              <h2 data-i18n-html="w.uniH">Cut to be <em>shared</em></h2>
+              <span class="kicker" data-i18n="w.uniK">Size guide</span>
+              <h2 data-i18n-html="w.uniH">Find your <em>fit</em></h2>
             </div>
-            <p data-i18n="w.uniP">Every piece fits any body. Here's how to find yours.</p>
+            <p data-i18n="w.uniP">Simple sizes for every piece. Here's how to find yours.</p>
           </div>
           <ul class="w-sizes">
             <li data-reveal><span class="w-sz-k" data-i18n="w.u1b">Jeans</span><b>W26–W36</b><span data-i18n="w.u1s">Waist sizes W26 to W36, straight leg.</span></li>
@@ -494,7 +507,7 @@
               <li><a href="#novedades" data-jump="cardigans" data-i18n="cat.cardigans">Cardigans &amp; vests</a></li>
               <li><a href="#novedades" data-jump="accessories" data-i18n="cat.accessories">Accessories</a></li>
               <li><a href="#lookbook" data-i18n="nav.lookbook">Lookbook</a></li>
-              <li><a href="#high-noon">High Noon · Drop 02</a></li>
+              <li><a href="#home" data-i18n="nav.drops">All drops</a></li>
             </ul>
           </div>
           <div>

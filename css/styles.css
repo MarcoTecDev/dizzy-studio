@@ -3178,6 +3178,405 @@ nav.main a.nav-west:hover .star,
   }
 }
 
+/* ===== Portada: solo el logo y los dos drops =====
+   Siempre en oscuro (el logo es claro). La bola de lana abre la tienda de punto y la estrella, Rodeo. */
+.view-home header.top,
+.view-home footer,
+.view-home .notice,
+.view-home .progress {
+  display: none !important;
+}
+.home {
+  --bg: #110d0f;
+  --surface: #1c1619;
+  --ink: #f6f2ec;
+  --muted: #a99ca2;
+  --line: #33292d;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 76px 16px 48px;
+  overflow: hidden;
+  color: var(--ink);
+  background:
+    radial-gradient(55% 45% at 27% 72%, rgba(255, 95, 168, 0.17), rgba(255, 95, 168, 0) 70%),
+    radial-gradient(55% 45% at 73% 72%, rgba(226, 176, 74, 0.15), rgba(226, 176, 74, 0) 70%),
+    #110d0f;
+}
+.home[hidden] {
+  display: none;
+}
+.home-lang {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top, 0px));
+  right: max(16px, env(safe-area-inset-right, 0px));
+}
+.home-lang .lang {
+  margin: 0;
+}
+.home-in {
+  width: min(1100px, 100%);
+  display: grid;
+  justify-items: center;
+  gap: clamp(14px, 2.6vh, 26px);
+}
+.home-logo {
+  margin: 0;
+  width: min(440px, 74vw, 46vh);
+  line-height: 0;
+  animation: homeIn 1s var(--ease) both;
+}
+.home-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.hl-a {
+  fill: #f6f2ec;
+}
+.hl-b {
+  fill: #ff5fa8;
+}
+.home-k {
+  margin: 0;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  animation: homeIn 1s var(--ease) both 0.15s;
+}
+@keyframes homeIn {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+}
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.home-drops {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 4vw, 64px);
+}
+.drop {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 8px;
+  padding: 18px 10px 24px;
+  border-radius: 32px;
+  color: inherit;
+  text-decoration: none;
+  animation: homeIn 1.1s var(--ease) both 0.25s;
+  transition: background-color 0.4s;
+}
+.drop-rodeo {
+  animation-delay: 0.38s;
+}
+.drop:hover,
+.drop:focus-visible {
+  background: rgba(255, 255, 255, 0.04);
+}
+.drop-art {
+  position: relative;
+  width: clamp(140px, min(25vw, 30vh), 290px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+.drop-art img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 22px 26px rgba(0, 0, 0, 0.55));
+}
+.drop-glow {
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  filter: blur(34px);
+  opacity: 0.5;
+  transition:
+    opacity 0.5s,
+    transform 0.7s var(--ease);
+}
+.drop-knit .drop-glow {
+  background: #ff5fa8;
+}
+.drop-rodeo .drop-glow {
+  background: #e2b04a;
+}
+.drop:hover .drop-glow,
+.drop:focus-visible .drop-glow {
+  opacity: 0.85;
+  transform: scale(1.15);
+}
+/* la bola flota y, al pasar por encima, rueda un poco */
+.drop-knit .drop-art img {
+  animation: ballFloat 5s ease-in-out infinite;
+  transition: scale 0.6s var(--ease);
+}
+.drop-knit:hover .drop-art img,
+.drop-knit:focus-visible .drop-art img {
+  scale: 1.07;
+  animation:
+    ballFloat 5s ease-in-out infinite,
+    ballRoll 0.9s var(--ease);
+}
+@keyframes ballFloat {
+  50% {
+    translate: 0 -10px;
+    rotate: -3deg;
+  }
+}
+@keyframes ballRoll {
+  40% {
+    rotate: -14deg;
+  }
+}
+/* la estrella cuelga de su clavo y se balancea */
+.drop-swing {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 15.8%;
+  animation: starSway 3.2s ease-in-out infinite alternate;
+}
+.drop-swing img {
+  display: block;
+}
+.drop-rodeo:hover .drop-swing,
+.drop-rodeo:focus-visible .drop-swing {
+  animation-duration: 0.9s;
+}
+@keyframes starSway {
+  from {
+    rotate: -4deg;
+  }
+  to {
+    rotate: 4deg;
+  }
+}
+.drop-nail {
+  position: absolute;
+  left: 50%;
+  top: 15.8%;
+  z-index: 2;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f2f2f2, #8a8a8a 55%, #2e2e2e);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+}
+.drop-n {
+  margin-top: 6px;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.drop-name {
+  font-family: var(--f-display);
+  font-size: clamp(2.2rem, 5.4vw, 4rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+.drop-knit .drop-name {
+  color: #ff5fa8;
+}
+.drop-rodeo .drop-name {
+  font-family: var(--f-west);
+  font-size: clamp(1.9rem, 4.6vw, 3.4rem);
+  color: #e2b04a;
+}
+.drop-go {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(246, 242, 236, 0.3);
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    border-color 0.3s;
+}
+.drop-go svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  transition: translate 0.35s var(--ease);
+}
+.drop:hover .drop-go,
+.drop:focus-visible .drop-go {
+  background: #f6f2ec;
+  color: #110d0f;
+  border-color: #f6f2ec;
+}
+.drop:hover .drop-go svg {
+  translate: 4px 0;
+}
+@media (max-width: 520px) {
+  .home {
+    padding-top: 70px;
+  }
+  .drop {
+    padding: 12px 4px 18px;
+    border-radius: 24px;
+  }
+  .drop-go {
+    height: 40px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-logo,
+  .home-k,
+  .drop,
+  .drop-knit .drop-art img,
+  .drop-swing {
+    animation: none !important;
+  }
+}
+
+/* cabecera: cada drop tiene su propio menú */
+:root:not(.theme-west) .nav-rodeo,
+.theme-west .nav-knit {
+  display: none !important;
+}
+
+/* charms personalizables: selector de letra */
+.sz-pick.letters {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+  gap: 6px;
+}
+.sz-pick.letters button {
+  min-width: 0;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  font-family: var(--f-display);
+  font-size: 17px;
+}
+
+/* Rodeo: tarjeta "Hazlo tuyo" al final del mosaico */
+.w-bento .w-cust {
+  grid-template-rows: none;
+  align-content: space-between;
+  gap: 12px;
+  padding: clamp(18px, 2vw, 26px);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+  text-decoration: none;
+  overflow: hidden;
+}
+.w-bento .w-cust::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1.5px dashed var(--stitch);
+  border-radius: 17px;
+  pointer-events: none;
+}
+.w-cust-k {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--stitch);
+}
+.w-cust-h {
+  font-family: var(--f-display);
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+.w-cust-h em {
+  font-style: normal;
+  color: var(--stitch);
+}
+.w-cust-p {
+  font-size: 14px;
+  opacity: 0.78;
+}
+.w-cust-letters {
+  display: flex;
+  gap: 6px;
+}
+.w-cust-letters i {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-style: normal;
+  font-family: var(--f-west);
+  font-size: 18px;
+  color: #fff;
+  background: #b4532a;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.25);
+  transition: translate 0.4s var(--ease);
+}
+.w-cust-letters i:nth-child(2) {
+  background: #3a5c8f;
+}
+.w-cust-letters i:nth-child(3) {
+  background: #2f6b3a;
+}
+.w-cust-letters i:nth-child(4) {
+  background: #c59a3a;
+}
+.w-cust:hover .w-cust-letters i {
+  translate: 0 -6px;
+}
+.w-cust:hover .w-cust-letters i:nth-child(2) {
+  transition-delay: 0.05s;
+}
+.w-cust:hover .w-cust-letters i:nth-child(3) {
+  transition-delay: 0.1s;
+}
+.w-cust:hover .w-cust-letters i:nth-child(4) {
+  transition-delay: 0.15s;
+}
+.w-cust-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+}
+.w-cust-go svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

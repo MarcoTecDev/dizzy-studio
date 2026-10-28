@@ -49,12 +49,16 @@
   });
 
   /* ---------- avisos rotativos ---------- */
-  const NOTES = ["n.5", "n.1", "n.2", "n.3", "n.4"];
+  // la fecha del drop de lana (n.2) no sale en Rodeo
+  const NOTES = ["n.1", "n.2", "n.3", "n.4"];
+  const notesNow = () => (root.classList.contains("theme-west") ? NOTES.filter((k) => k !== "n.2") : NOTES);
   const nb = $("#notice");
   let ni = 0;
   function showNote(first) {
     const s = document.createElement("span");
-    s.textContent = t(NOTES[ni]);
+    const list = notesNow();
+    ni = ni % list.length;
+    s.textContent = t(list[ni]);
     if (!first && !reduce) s.className = "in";
     nb.appendChild(s);
     requestAnimationFrame(() => requestAnimationFrame(() => s.classList.remove("in")));
@@ -63,7 +67,7 @@
       o.classList.add("out");
       setTimeout(() => o.remove(), 700);
     });
-    ni = (ni + 1) % NOTES.length;
+    ni = (ni + 1) % list.length;
   }
   setInterval(() => showNote(false), 3800);
 
@@ -78,7 +82,7 @@
   }
 
   function renderWestBand() {
-    const words = [t("w.b1"), t("w.b2"), t("w.b3"), t("w.b4"), "High Noon"];
+    const words = [t("w.b1"), t("w.b2"), t("w.b3"), t("w.b4"), "Rodeo"];
     $("#wBand").innerHTML = Array(4)
       .fill(words)
       .flat()
@@ -90,6 +94,7 @@
      Los nombres, colores, categorías y descripciones se traducen en js/i18n.js:
      nombre → "p.<id>", descripción → "d.<id>", color → "c.<color>", categoría → "cat.<cat>". */
   const ONE = "ONE"; // talla única
+  const INITIALS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""); // letras para los charms personalizados
   const P = [
     { id: "jersey", cat: "sweaters", color: "magenta", hex: "#B5195F", price: 89, flag: "best", hot: true, sizes: ["XS", "S", "M", "L", "XL"] },
     { id: "cardigan", cat: "cardigans", color: "black", hex: "#161314", price: 95, sizes: ["XS", "S", "M", "L", "XL"] },
@@ -117,7 +122,10 @@
       hot: true,
       sizes: [ONE],
     },
-    /* ----- Drop 02 · High Noon (cápsula unisex del oeste). drop: "west" las saca de la tienda principal ----- */
+    { id: "polo", cat: "tops", color: "magenta", hex: "#B5195F", price: 69, flag: "new", sizes: ["XS", "S", "M", "L", "XL"] },
+    // pick: "initial" → en vez de tallas se elige la letra del charm personalizado
+    { id: "charms-lana", cat: "accessories", color: "magenta", hex: "#B5195F", price: 19, flag: "custom", pick: "initial", sizes: INITIALS },
+    /* ----- Drop 02 · Rodeo (cápsula del oeste). drop: "west" las saca de la tienda de lana ----- */
     { id: "vaquero", drop: "west", cat: "denim", color: "midBlue", hex: "#4A6FA5", price: 95, flag: "wanted", hot: true, sizes: ["W26", "W28", "W30", "W32", "W34", "W36"] },
     { id: "sombrero", drop: "west", cat: "hats", color: "sand", hex: "#D4B48C", price: 69, flag: "wanted", sizes: ["S", "M", "L"] },
     { id: "botas", drop: "west", cat: "boots", color: "tan", hex: "#7A4A2A", price: 189, flag: "wanted", hot: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"] },
@@ -136,9 +144,12 @@
       flag: "wanted",
       sizes: ["75", "85", "95", "105"],
     },
+    { id: "camisa", drop: "west", cat: "shirts", color: "ecru", hex: "#EFE6D2", price: 79, flag: "new", sizes: ["XS", "S", "M", "L", "XL"] },
+    { id: "bandana", drop: "west", cat: "accessories", color: "terracotta", hex: "#B4532A", price: 22, flag: "new", sizes: [ONE] },
+    { id: "charms-rodeo", drop: "west", cat: "accessories", color: "sand", hex: "#D4B48C", price: 19, flag: "custom", pick: "initial", sizes: INITIALS },
   ];
   const KNIT = P.filter((p) => !p.drop); // colección de punto (tienda principal)
-  const WEST = P.filter((p) => p.drop === "west"); // cápsula High Noon
+  const WEST = P.filter((p) => p.drop === "west"); // cápsula Rodeo
   const groupOf = (p) => (p.drop === "west" ? WEST : KNIT);
   const nameOf = (p) => t("p." + p.id);
   const colourName = (c) => t("c." + c);
@@ -195,7 +206,7 @@
     renderCards(grid, KNIT);
     setFilter(currentCat, true);
   }
-  /* página High Noon: tarjetas en mosaico (al pasar el ratón se ve la prenda puesta) y lookbook horizontal */
+  /* página Rodeo: tarjetas en mosaico (al pasar el ratón se ve la prenda puesta) y lookbook horizontal */
   const WEST_LOOKS = [
     ["vaquero", "", 2],
     ["sombrero", "", 1],
@@ -203,8 +214,12 @@
     ["botas", "", 2],
     ["cinturon", "", 1],
     ["cinturon", "negro", 2],
+    ["camisa", "", 1],
+    ["bandana", "", 2],
     ["chaqueta", "", 3],
+    ["charms-rodeo", "", 2],
     ["sombrero", "", 3],
+    ["camisa", "", 3],
   ];
   function renderWest() {
     const el = $("#westGrid");
@@ -229,12 +244,21 @@
       if (i === 0) pic.querySelector("img").sizes = "(max-width: 900px) 100vw, 640px";
       c.querySelectorAll(".vsw").forEach((b) => b.addEventListener("click", () => setOn(b.dataset.v)));
     });
+    // tarjeta final: personaliza tus zuecos (lleva al pack de charms)
+    const cp = P.find((x) => x.id === "charms-rodeo");
+    el.insertAdjacentHTML(
+      "beforeend",
+      `<a class="card w-cust" id="custom" href="#${cp.id}" data-reveal><span class="w-cust-k">${t("w.custK")}</span><span class="w-cust-h">${t("w.custH")}</span><span class="w-cust-p">${t("w.custP")}</span><span class="w-cust-letters" aria-hidden="true">${["D", "R", "M", "S"].map((l) => `<i>${l}</i>`).join("")}</span><span class="w-cust-go">${t("w.custCta")} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>`,
+    );
+    const two = (n) => String(n).padStart(2, "0");
+    $("#wCount").textContent = two(WEST.length);
+    $("#wAcc").textContent = two(WEST.filter((p) => ["hats", "belts", "accessories"].includes(p.cat)).length);
     $("#wFrom").textContent = eur(Math.min(...WEST.map((p) => p.price))).replace(/[.,]00(?=\D|$)/, "");
     $("#wTrack").innerHTML = WEST_LOOKS.map(([id, v, k], n) => {
       const p = P.find((x) => x.id === id),
         src = poseImgs(p, v)[k - 1],
         name = nameOf(p);
-      return `<a class="w-look" href="#${hashFor(p, v)}"><span class="w-look-img"><img src="${src}" srcset="${small(src)} 640w, ${src} 1200w" sizes="(max-width: 900px) 72vw, 30vw" alt="${t("w.lbAlt", { name })}" width="1200" height="1200" loading="lazy" decoding="async"></span><span class="w-look-c"><b>${String(n + 1).padStart(2, "0")}</b>${name}</span></a>`;
+      return `<a class="w-look" href="#${hashFor(p, v)}"><span class="w-look-img"><img src="${src}" srcset="${small(src)} 640w, ${src} 1200w" sizes="(max-width: 900px) 72vw, 30vw" alt="${name}" width="1200" height="1200" loading="lazy" decoding="async"></span><span class="w-look-c"><b>${String(n + 1).padStart(2, "0")}</b>${name}</span></a>`;
     }).join("");
   }
   function renderCards(el, list) {
@@ -247,17 +271,20 @@
       c.style.setProperty("--d", (i % 3) * 0.08 + "s");
       const one = p.sizes.length === 1;
       const name = nameOf(p);
+      const quick = p.pick
+        ? `<div class="quick"><span class="t">${t("f.custom")}</span><div class="sizes"><button class="one go" data-go="1">${t("personalise")}</button></div></div>`
+        : `<div class="quick"><span class="t">${one ? t("oneSize") : t("addSize")}</span><div class="sizes">${p.sizes
+            .map(
+              (s) =>
+                `<button class="${one ? "one" : ""}" data-size="${s}" aria-label="${t("a.addSize", { name, s: sizeLabel(s) })}">${one ? t("addToBag") : s}</button>`,
+            )
+            .join("")}</div></div>`;
       c.innerHTML = `
    <div class="pic">
      ${p.flag ? `<span class="flag ${p.hot ? "hot" : ""}">${t("f." + p.flag)}</span>` : ""}
      <button class="fav" data-id="${p.id}" aria-pressed="${favs.has(p.id)}" aria-label="${t("a.saveFav", { name })}">${heart}</button>
      <img src="${prodImg(p)}" ${prodSet(p)} ${CARD_SIZES} alt="${t("imgAlt", { name, color: colourName(p.color).toLowerCase() })}" width="1000" height="1000" loading="lazy" decoding="async">
-     <div class="quick"><span class="t">${one ? t("oneSize") : t("addSize")}</span><div class="sizes">${p.sizes
-       .map(
-         (s) =>
-           `<button class="${one ? "one" : ""}" data-size="${s}" aria-label="${t("a.addSize", { name, s: sizeLabel(s) })}">${one ? t("addToBag") : s}</button>`,
-       )
-       .join("")}</div></div>
+     ${quick}
    </div>
    <div class="info"><div><a class="plink" href="#${p.id}"><h3>${name}</h3></a>${
      VARS(p).length > 1
@@ -267,7 +294,7 @@
       el.appendChild(c);
       let cv = "";
       c.querySelectorAll(".quick button").forEach((b) =>
-        b.addEventListener("click", () => addToCart(p, b.dataset.size, false, cv)),
+        b.addEventListener("click", () => (b.dataset.go ? (location.hash = hashFor(p, cv)) : addToCart(p, b.dataset.size, false, cv))),
       );
       c.querySelector(".pic").addEventListener("click", (e) => {
         if (e.target.closest("button")) return;
@@ -374,7 +401,7 @@
     return [
       nameOf(p),
       VARS(p).length > 1 ? colourName(varOf(p, v).color).toLowerCase() : null,
-      size === ONE ? null : t("sizeShort", { s: size }),
+      size === ONE ? null : p.pick ? t("letterLong", { s: size }).toLowerCase() : t("sizeShort", { s: size }),
     ]
       .filter(Boolean)
       .join(" · ");
@@ -410,7 +437,7 @@
       const el = document.createElement("div");
       el.className = "item";
       el.innerHTML = `<img src="${small(prodImg(p, it.v))}" alt="" width="72" height="72" decoding="async">
-     <div><h4>${nameOf(p)}</h4><div class="sub">${colourName(varOf(p, it.v).color)} · ${it.size === ONE ? t("oneSize") : t("sizeLong", { s: it.size })}</div>
+     <div><h4>${nameOf(p)}</h4><div class="sub">${colourName(varOf(p, it.v).color)} · ${it.size === ONE ? t("oneSize") : t(p.pick ? "letterLong" : "sizeLong", { s: it.size })}</div>
      <div class="qty"><button aria-label="${t("a.minus")}">−</button><span>${it.qty}</span><button aria-label="${t("a.plus")}">+</button></div></div>
      <div class="right"><span class="price">${eur(p.price * it.qty)}</span><button class="rm">${t("cart.remove")}</button></div>`;
       const [minus, plus] = el.querySelectorAll(".qty button");
@@ -587,7 +614,17 @@
 
   /* ---------- fichas de prenda ---------- */
   function fitText(p) {
-    const own = { vaquero: "fit.jeans", sombrero: "fit.hat", botas: "fit.boots", chaqueta: "fit.jacket", cinturon: "fit.belt" }[p.id];
+    if (p.pick === "initial") return t("fit.charms");
+    const own = {
+      vaquero: "fit.jeans",
+      sombrero: "fit.hat",
+      botas: "fit.boots",
+      chaqueta: "fit.jacket",
+      cinturon: "fit.belt",
+      camisa: "fit.shirt",
+      bandana: "fit.bandana",
+      polo: "fit.polo",
+    }[p.id];
     if (own) return t(own);
     if (p.id === "calcetines") return t("fit.socks");
     if (p.sizes.length === 1) return t("fit.one");
@@ -613,7 +650,7 @@
       next = list[(i + 1) % list.length];
     const one = p.sizes.length === 1;
     const name = nameOf(p);
-    let sel = one ? p.sizes[0] : p.sizes.includes("M") ? "M" : p.sizes[1];
+    let sel = one ? p.sizes[0] : p.pick ? "D" : p.sizes.includes("M") ? "M" : p.sizes[1];
     const galleryFor = (cv) => [
       ...poseImgs(p, cv).map((src, k) => ({ src, cap: t("pose." + (k + 1)) })),
       { src: prodImg(p, cv), cap: t("pose.5") },
@@ -621,8 +658,8 @@
     const imgs = galleryFor(v);
     const multi = VARS(p).length > 1;
     pdpWrap.innerHTML = `
-   <nav class="crumbs" aria-label="${t("a.crumbs")}"><a class="back" href="${p.drop ? "#high-noon" : "#novedades"}"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>${t("pdp.back")}</a><a href="#novedades">${t("pdp.shop")}</a><span>/</span>${
-     p.drop ? `<a href="#high-noon">High Noon</a>` : `<a href="#novedades" data-jump="${p.cat}">${t("cat." + p.cat)}</a>`
+   <nav class="crumbs" aria-label="${t("a.crumbs")}"><a class="back" href="${p.drop ? "#w-shop" : "#novedades"}"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>${t("pdp.back")}</a><a href="${p.drop ? "#w-shop" : "#novedades"}">${t("pdp.shop")}</a><span>/</span>${
+     p.drop ? `<a href="#rodeo">Rodeo</a>` : `<a href="#novedades" data-jump="${p.cat}">${t("cat." + p.cat)}</a>`
    }<span>/</span><span>${name}</span></nav>
    <div class="pdp-grid">
      <div><div class="gallery" id="gal">${imgs.map((m, k) => `<figure ${k ? "data-reveal" : ""} style="--d:${(k % 2) * 0.08}s"><img src="${m.src}" srcset="${small(m.src)} ${k === 4 ? 520 : 640}w, ${m.src} ${k === 4 ? 1000 : 1200}w" sizes="${k ? "(max-width: 900px) 86vw, 380px" : "(max-width: 900px) 86vw, 760px"}" alt="${name}, ${m.cap.toLowerCase()}" width="1200" height="1200" decoding="async" ${k > 1 ? 'loading="lazy"' : ""}><figcaption>${m.cap}</figcaption></figure>`).join("")}</div>
@@ -634,8 +671,8 @@
        <div class="col">${multi ? "" : `<i style="background:${p.hex}"></i>`}${t("pdp.colour")} <b id="pdpColor">${colourName(varOf(p, v).color)}</b></div>
        ${multi ? `<div class="vpick" id="vPick">${swatches(p, v, "vsw big")}</div>` : ""}
        <p class="desc">${t("d." + p.id)}</p>
-       <div><div class="sz-head"><b>${one ? t("oneSize") : t("pdp.choose")}</b>${p.sizes.length > 3 && !p.drop ? `<a href="#tallas">${t("pdp.guide")}</a>` : ""}</div></div>
-       <div class="sz-pick" id="szPick">${p.sizes.map((s) => `<button data-size="${s}" aria-pressed="${s === sel}">${sizeLabel(s)}</button>`).join("")}</div>
+       <div><div class="sz-head"><b>${one ? t("oneSize") : p.pick ? t("pdp.initial") : t("pdp.choose")}</b>${p.sizes.length > 3 && !p.drop && !p.pick ? `<a href="#tallas">${t("pdp.guide")}</a>` : ""}</div></div>
+       <div class="sz-pick${p.pick ? " letters" : ""}" id="szPick">${p.sizes.map((s) => `<button data-size="${s}" aria-pressed="${s === sel}">${sizeLabel(s)}</button>`).join("")}</div>
        <div class="buy-row"><button class="btn" id="pdpAdd">${t("pdp.add", { price: eur(p.price) })}</button>
          <button class="icon-btn" id="pdpFav" data-id="${p.id}" aria-pressed="${favs.has(p.id)}" aria-label="${t("pdp.fav")}">${heart}</button></div>
        <div class="mini-perks"><span>${t("pdp.perk1")}</span><span>${t("pdp.perk2")}</span><span>${t("pdp.perk3")}</span></div>
@@ -702,16 +739,21 @@
     );
     document.title = name + " · Dizzy Studio";
   }
-  /* tres vistas en la misma página: la tienda, la página High Noon y la ficha de prenda */
-  const westMain = $("#west");
+  /* cuatro vistas en la misma página: la portada con los drops, la tienda de lana, Rodeo y la ficha de prenda */
+  const westMain = $("#west"),
+    homeMain = $("#home");
   const lastY = { store: 0, west: 0 };
   let view = "store";
+  // direcciones de la página Rodeo (#high-noon se mantiene por si alguien guardó el enlace antiguo)
+  const WEST_IDS = ["rodeo", "high-noon", "w-shop", "w-lb", "w-fit", "custom"];
   function showView(next, themeWest) {
     if (view === "store" || view === "west") lastY[view] = scrollY;
+    homeMain.hidden = next !== "home";
     storeMain.hidden = next !== "store";
     westMain.hidden = next !== "west";
     pdpMain.hidden = next !== "pdp";
     root.classList.toggle("theme-west", !!themeWest);
+    root.classList.toggle("view-home", next === "home");
     const from = view;
     view = next;
     return from;
@@ -730,13 +772,20 @@
       scrollTo({ top: 0, behavior: "instant" });
       revealIn(pdpMain);
       closeCart();
-    } else if (id === "high-noon" || id === "w-shop") {
+    } else if (!id || id === "home") {
+      pdpState = null;
+      showView("home", false);
+      document.title = "Dizzy Studio";
+      scrollTo({ top: 0, behavior: "instant" });
+      closeCart();
+    } else if (WEST_IDS.includes(id)) {
       pdpState = null;
       const wasWest = root.classList.contains("theme-west");
       const from = showView("west", true);
-      if (!wasWest) playSheriff(); // la estrella sale al llegar desde la tienda
-      document.title = "High Noon · Dizzy Studio";
-      if (id === "w-shop") requestAnimationFrame(() => $("#w-shop").scrollIntoView({ behavior: "smooth" }));
+      if (!wasWest) playSheriff(); // la estrella sale al llegar desde la portada o la tienda de lana
+      document.title = "Rodeo · Dizzy Studio";
+      const target = id !== "rodeo" && id !== "high-noon" && document.getElementById(id);
+      if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: from === "west" ? "smooth" : "instant" }));
       else scrollTo({ top: from === "pdp" ? lastY.west : 0, behavior: "instant" });
       revealIn(westMain);
       closeCart();
@@ -786,7 +835,7 @@
     showNote(true);
     renderWest();
     if (pdpState) renderPDP(pdpState.p, pdpState.v);
-    else document.title = view === "west" ? "High Noon · Dizzy Studio" : "Dizzy Studio";
+    else document.title = view === "west" ? "Rodeo · Dizzy Studio" : "Dizzy Studio";
     if (!first) onScroll();
   }
   document.querySelectorAll(".lang button").forEach((b) =>
@@ -805,7 +854,7 @@
     wHeroImg = $("#wHeroImg"),
     wTitle = [...$("#wTitle").children],
     wBand = $("#wBand"),
-    wLb = $("#wLb"),
+    wLb = $("#w-lb"),
     wTrack = $("#wTrack"),
     words = [...$("#heroTitle").children];
   function onScroll() {
@@ -832,7 +881,7 @@
     if (knitRect) knit(knitRect);
     unravel(y);
     if (onWest) {
-      // página High Noon:
+      // página Rodeo:
       // · las dos palabras del título se separan, la tarjeta del duelo se abre hasta ocupar su sitio
       // · la banda de denim corre con el scroll
       // · el lookbook se desplaza en horizontal mientras bajas (solo en pantallas grandes)
@@ -922,7 +971,9 @@
      2) El nombre se enrolla en una bola de lana.
      3) La bola vuela hasta el logo pequeño de la cabecera.
      Un clic en cualquier sitio (o Escape) salta la entrada. */
-  const intro = $("#intro");
+  let intro = $("#intro");
+  // copia intacta de la entrada: la bola de lana de la portada la vuelve a reproducir
+  const introTpl = intro ? intro.cloneNode(true) : null;
   const LAYERS = 4;
   const UNRAVEL_MS = 2000; // duración del descosido
   function startIntro() {
@@ -1142,8 +1193,8 @@
     requestAnimationFrame(() => requestAnimationFrame(run));
   }
 
-  /* ---------- estrella: entrada de High Noon ----------
-     Al entrar en la página High Noon desde la tienda, una estrella de sheriff de latón colgada de un clavo
+  /* ---------- estrella: entrada de Rodeo ----------
+     Al entrar en la página Rodeo desde la portada o la tienda de lana, una estrella de sheriff de latón colgada de un clavo
      recibe cinco agujeros, se descuelga y cae; detrás aparece la página. Un clic (o Escape) la salta.
      Son 6 fotogramas (img/west/estrella/estrella-0 … -5.webp, de 0 a 5 agujeros) que se muestran en orden.
      HITS: momento de cada agujero (ms). HOLE_AT: dónde está cada agujero en la imagen (% de ancho y alto). */
@@ -1158,7 +1209,7 @@
   ];
   let sheriffRun = null,
     starReady = null;
-  // carga los fotogramas (en segundo plano al abrir la web, o al entrar en High Noon si aún no estaban)
+  // carga los fotogramas (en segundo plano al abrir la web, o al entrar en Rodeo si aún no estaban)
   function loadStar() {
     if (!starReady && sheriff)
       starReady = Promise.all(
@@ -1289,13 +1340,33 @@
     });
   }
 
+  /* ---------- portada: los dos drops ----------
+     La bola de lana reproduce la entrada de lana y abre la tienda de punto;
+     la estrella abre Rodeo (allí sale la entrada de la estrella). */
+  function playYarn() {
+    if (reduce || !introTpl) return;
+    if (intro && intro.isConnected) intro.remove();
+    intro = introTpl.cloneNode(true);
+    intro.querySelectorAll("[data-i18n]").forEach((el) => (el.textContent = t(el.dataset.i18n)));
+    document.body.prepend(intro);
+    root.classList.add("intro-lock", "intro-hold");
+    startIntro();
+  }
+  $("#dropKnit").addEventListener("click", (e) => {
+    e.preventDefault();
+    playYarn();
+    location.hash = "#inicio";
+  });
+
   /* ---------- arranque ---------- */
   syncFavBadge();
   setLang(LANG, true);
-  const westStart = /^#(high-noon|w-shop)$/.test(location.hash);
+  const startId = decodeURIComponent(location.hash.slice(1));
+  // la entrada de lana sale sola solo si se abre directamente la tienda de lana
+  const noYarn = !startId || startId === "home" || WEST_IDS.includes(startId);
   if (intro) {
-    if (reduce || westStart) {
-      // con "reducir movimiento" no se muestra la entrada; si se entra directo a High Noon, sale la estrella
+    if (reduce || noYarn) {
+      // con "reducir movimiento" no se muestra; en la portada espera a que pulses la bola; en Rodeo sale la estrella
       intro.remove();
       root.classList.remove("intro-lock", "intro-hold");
     } else startIntro();
